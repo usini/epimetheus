@@ -1,7 +1,7 @@
-#define WIFI_AP          false
+#define WIFI_HOTSPOT          false
 #define WIFI_SSID        ""
 #define WIFI_PASSWORD    ""
-#define MQTT             true
+bool mqtt_enable = true;
 #define MQTT_SERVER      "192.168.0."
 #define MQTT_SERVERPORT  1883                   // use 8883 for SSL
 #define MQTT_USERNAME    ""
@@ -30,6 +30,7 @@ void setup() {
 
 void loop() {
   wifi_update();
+  
   if ((millis() - lastTime) > timerDelay) {
     update_bme680();
     update_tsl_2561();
@@ -79,7 +80,7 @@ void loop() {
     drawValue(4, String(pressure), "hPa");
     webSocket.broadcastTXT("{ \"temp\": " + String(temp) + ", \"hum\": " + String(humidity) + ", \"pressure\": " + String(pressure) + ", \"gas\": " + String(gas) + ", \"lux\": " + String(lux) + "}");
     
-    if (MQTT) {
+    if (mqtt_enable) {
       mqtt_temp.publish(temp);
       mqtt_humidity.publish(humidity);
       mqtt_pressure.publish(lux);

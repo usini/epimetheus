@@ -1,3 +1,12 @@
+#define WIFI_AP          false
+#define WIFI_SSID        ""
+#define WIFI_PASSWORD    ""
+#define MQTT             true
+#define MQTT_SERVER      "192.168.0."
+#define MQTT_SERVERPORT  1883                   // use 8883 for SSL
+#define MQTT_USERNAME    ""
+#define MQTT_KEY         ""
+
 // https://randomnerdtutorials.com/esp32-bme680-web-server-arduino/
 
 #include "debug.h"
@@ -48,7 +57,7 @@ void loop() {
     debug_println(" Lux");
 
     debug_println(" --------------- ");
-    
+
     int temp_color = TFT_RED;
     if (temp < 60) {
       if (temp > 40) {
@@ -69,6 +78,14 @@ void loop() {
     drawValue(3, String(gas), "Kohm");
     drawValue(4, String(pressure), "hPa");
     webSocket.broadcastTXT("{ \"temp\": " + String(temp) + ", \"hum\": " + String(humidity) + ", \"pressure\": " + String(pressure) + ", \"gas\": " + String(gas) + ", \"lux\": " + String(lux) + "}");
+    
+    if (MQTT) {
+      mqtt_temp.publish(temp);
+      mqtt_humidity.publish(humidity);
+      mqtt_pressure.publish(lux);
+      mqtt_gas.publish(gas);
+      mqtt_lux.publish(pressure);
+    }
     lastTime = millis();
   }
 }

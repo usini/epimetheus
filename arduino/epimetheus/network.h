@@ -46,7 +46,7 @@ void MQTT_connect() {
     debug_print(String(mqtt.connectErrorString(ret)));
     debug_println(" Retrying MQTT connection in 5 seconds...");
     mqtt.disconnect();
-    delay(100);  // wait 5 seconds
+    delay(1000);  // wait 5 seconds
     retries--;
     if (retries == 0) {
       // basically die and wait for WDT to reset me
@@ -73,7 +73,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
     case WStype_TEXT:
       debug_println("Message reçu : " + String((char *)payload));
       break;
-      break;
   }
 }
 
@@ -84,8 +83,14 @@ void wifi_setup(char* id) {
   if (WIFI_HOTSPOT) {
     WiFi.softAP(id);
   } else {
-    WiFi.mode(WIFI_STA);
+    Serial.print("SSID - ");
+    Serial.println(WIFI_SSID);
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(50);
+      Serial.print(".");
+    }
+
     MDNS.begin(id);
     MDNS.addService("http", "tcp", 80);
     NBNS.begin(id);

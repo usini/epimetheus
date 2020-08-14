@@ -1,8 +1,8 @@
 #define WIFI_HOTSPOT          false
 #define WIFI_SSID        ""
 #define WIFI_PASSWORD    ""
-bool mqtt_enable = true;
-#define MQTT_SERVER      "192.168.0."
+bool mqtt_enable = false;
+#define MQTT_SERVER      "192.168."
 #define MQTT_SERVERPORT  1883                   // use 8883 for SSL
 #define MQTT_USERNAME    ""
 #define MQTT_KEY         ""
@@ -10,7 +10,7 @@ bool mqtt_enable = true;
 // https://randomnerdtutorials.com/esp32-bme680-web-server-arduino/
 
 #include "debug.h"
-#include "web.h"
+#include "network.h"
 #include "bme680.h"
 #include "tsl2561.h"
 #include "st7789.h"
@@ -78,13 +78,21 @@ void loop() {
     drawValue(2, String(lux), "Lux");
     drawValue(3, String(gas), "Kohm");
     drawValue(4, String(pressure), "hPa");
+
+    Serial.println("Sending websocket");
+    
     webSocket.broadcastTXT("{ \"temp\": " + String(temp) + ", \"hum\": " + String(humidity) + ", \"pressure\": " + String(pressure) + ", \"gas\": " + String(gas) + ", \"lux\": " + String(lux) + "}");
     
     if (mqtt_enable) {
+      Serial.println("Sending mqtt temp");
       mqtt_temp.publish(temp);
+      Serial.println("Sending mqtt humidity");
       mqtt_humidity.publish(humidity);
+      Serial.println("Sending mqtt lux");
       mqtt_pressure.publish(lux);
+      Serial.println("Sending mqtt gas");
       mqtt_gas.publish(gas);
+      Serial.println("Sending mqtt pressure");
       mqtt_lux.publish(pressure);
     }
     lastTime = millis();

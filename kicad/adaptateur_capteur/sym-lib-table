@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name adaptateur_capteur)(type Legacy)(uri ${KIPRJMOD}/adaptateur_capteur.lib)(options "")(descr ""))
+)

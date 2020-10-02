@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name adaptateur_capteur)(type Legacy)(uri ${KIPRJMOD}/adaptateur_capteur.lib)(options "")(descr ""))
+  (lib (name adaptateur_capteur-rescue)(type Legacy)(uri ${KIPRJMOD}/adaptateur_capteur-rescue.lib)(options "")(descr ""))
 )

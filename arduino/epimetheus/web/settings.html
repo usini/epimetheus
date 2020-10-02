@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Epimetheus</title>
+    <meta name="description" content="">
+    <meta name="author" content="LABSud">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
+    
+    <link rel="icon" type="image/png" href="images/favicon.png">   
+</head>
+
+<div id="scan_modal" class="modal">
+    <div class="modal-content theme_background">
+        <button id="scan_close">&times;</button>
+        <table id="wifi_scan_table"></table>
+    </div>
+</div>
+
+<div id="delete_modal" class="modal">
+    <div class="modal-content theme_background big_text">
+        <h1 id="delete_data_label">...</h1>
+        <button id="delete_ok_label" onclick="delete_data()">...</button><button id="delete_close">...</button>
+    </div>
+</div>
+
+<body class="theme_background">
+    
+    <div class="theme_light big_text bar">
+        <a href="/">📈</a>
+        <span id="ip_addr">...</span>
+    </div>
+    
+    <div style="font-size: 32px" class="theme_widget_background big_text bar center">
+        <span id="save_label">...</span>
+        <label style="margin: 3px" class="switch">
+            <input id="save_checkbox" type="checkbox">
+            <span class="slider round"></span>
+        </div>
+        
+        <button id="download_label" onclick="document.location='/download'" class="theme_widget_background big_text bar">...</button>
+        <button id="erase_label" onclick="open_delete()" class="theme_widget_background big_text  bar">...</button>
+        <span ></span>
+    </div>
+    <div class="theme_widget_background big_text bar">
+        <p>Wi-Fi - 1 - <button onclick="open_scan(0)">📶</button></p>
+        <p id="name_label_0">...</p> 
+        <input id="name_0" type="text" >
+        <p id="password_label_0">...</p>
+        <input id="pass_0" type="password" ><input type="checkbox" onclick="show_password(0)"> 👁️
+        <p>Wi-Fi - 2 - <button onclick="open_scan(1)">📶</button></p>
+        <p id="name_label_1">...</p>
+        <input id="name_1" type="text" >
+        <p id="password_label_1">...</p>
+        <input id="pass_1" type="password" ><input type="checkbox" onclick="show_password(1)"> 👁️
+    </div>
+</label>
+<button id="validate_label" onclick="save_settings()" class="theme_widget_background big_text bar">...</button>
+</body>
+<script src="lang.js"></script>
+<script src="settings.js"></script>
+<script src="toast.min.js"></script>
+</html>

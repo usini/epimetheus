@@ -1,5 +1,5 @@
 EESchema Schematic File Version 4
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -14,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L sechoir_solaire:BME680 U1
+L adaptateur_capteur:BME680 U1
 U 1 1 5F2C0F60
 P 1850 2650
 F 0 "U1" H 1858 3275 50  0000 C CNN

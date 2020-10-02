@@ -1,0 +1,102 @@
+.theme_background{
+    background-color: #131319ff;
+}
+
+.bar{
+    width:100%;
+}
+
+.theme_light{
+    background-color: #23c48eff;
+}
+
+.theme_dark{
+    background-color:#188963ff;
+}
+
+.theme_text {
+    color:#0a3728ff;
+}
+
+.big_text {
+    font-size: 20px;
+}
+
+img{    
+    padding-top: 4px;
+}
+
+.left{
+    padding-left:2px;
+}
+
+.right{
+    float: right;
+    padding-right:2px;
+}
+
+a:link{
+    text-decoration: none ;
+}
+
+a:hover{
+    background-color:#188963ff;
+}
+
+.theme_widget_background{
+    background-color:#212227ff;
+    color: #b7b7b9ff;
+}
+
+.margin {
+    margin: 15px;
+}
+
+.center {
+    text-align: center;
+}
+
+input{
+    border:0px;
+    
+    font-size:18px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color:red;
+    font-size:28px;
+  }
+ 
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

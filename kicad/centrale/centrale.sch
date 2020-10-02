@@ -1,0 +1,361 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L centrale:ESP32_DEVKIT U3
+U 1 1 5F454CCE
+P 5800 3350
+F 0 "U3" H 5925 5315 50  0000 C CNN
+F 1 "ESP32 Dev Kit" H 5925 5224 50  0000 C CNN
+F 2 "centrale:esp32_doit" H 5950 3300 50  0001 C CNN
+F 3 "" H 5950 3300 50  0001 C CNN
+	1    5800 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:AudioJack4 J8
+U 1 1 5F457848
+P 3800 3750
+F 0 "J8" H 3757 4075 50  0000 C CNN
+F 1 "AudioJack4" H 3757 3984 50  0000 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ31060-I_Horizontal" H 3800 3750 50  0001 C CNN
+F 3 "~" H 3800 3750 50  0001 C CNN
+	1    3800 3750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:AudioJack4 J7
+U 1 1 5F459383
+P 3800 2950
+F 0 "J7" H 3757 3275 50  0000 C CNN
+F 1 "AudioJack4" H 3757 3184 50  0000 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ31060-I_Horizontal" H 3800 2950 50  0001 C CNN
+F 3 "~" H 3800 2950 50  0001 C CNN
+	1    3800 2950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:AudioJack4 J6
+U 1 1 5F4599F2
+P 3800 2100
+F 0 "J6" H 3757 2425 50  0000 C CNN
+F 1 "AudioJack4" H 3757 2334 50  0000 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ31060-I_Horizontal" H 3800 2100 50  0001 C CNN
+F 3 "~" H 3800 2100 50  0001 C CNN
+	1    3800 2100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:AudioJack4 J5
+U 1 1 5F459D00
+P 3800 1350
+F 0 "J5" H 3757 1675 50  0000 C CNN
+F 1 "AudioJack4" H 3757 1584 50  0000 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ31060-I_Horizontal" H 3800 1350 50  0001 C CNN
+F 3 "~" H 3800 1350 50  0001 C CNN
+	1    3800 1350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:AudioJack4 J9
+U 1 1 5F45A4C0
+P 3800 4550
+F 0 "J9" H 3757 4875 50  0000 C CNN
+F 1 "AudioJack4" H 3757 4784 50  0000 C CNN
+F 2 "Connector_Audio:Jack_3.5mm_PJ31060-I_Horizontal" H 3800 4550 50  0001 C CNN
+F 3 "~" H 3800 4550 50  0001 C CNN
+	1    3800 4550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:VCC #PWR0102
+U 1 1 5F4A3C64
+P 4550 1700
+F 0 "#PWR0102" H 4550 1550 50  0001 C CNN
+F 1 "VCC" V 4568 1827 50  0000 L CNN
+F 2 "" H 4550 1700 50  0001 C CNN
+F 3 "" H 4550 1700 50  0001 C CNN
+	1    4550 1700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5F4A439B
+P 5000 1800
+F 0 "#PWR0103" H 5000 1550 50  0001 C CNN
+F 1 "GND" V 5005 1672 50  0000 R CNN
+F 2 "" H 5000 1800 50  0001 C CNN
+F 3 "" H 5000 1800 50  0001 C CNN
+	1    5000 1800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5250 1800 5000 1800
+$Comp
+L power:VCC #PWR0110
+U 1 1 5F4CBD09
+P 4000 900
+F 0 "#PWR0110" H 4000 750 50  0001 C CNN
+F 1 "VCC" H 4017 1073 50  0000 C CNN
+F 2 "" H 4000 900 50  0001 C CNN
+F 3 "" H 4000 900 50  0001 C CNN
+	1    4000 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0111
+U 1 1 5F4CC7F0
+P 3700 900
+F 0 "#PWR0111" H 3700 650 50  0001 C CNN
+F 1 "GND" H 3705 727 50  0000 C CNN
+F 2 "" H 3700 900 50  0001 C CNN
+F 3 "" H 3700 900 50  0001 C CNN
+	1    3700 900 
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4000 1150 4000 900 
+Wire Wire Line
+	3700 1150 3700 900 
+Wire Wire Line
+	4000 1900 4200 1900
+Wire Wire Line
+	4200 1900 4200 1150
+Wire Wire Line
+	4200 1150 4000 1150
+Connection ~ 4000 1150
+Wire Wire Line
+	4000 2750 4200 2750
+Wire Wire Line
+	4200 2750 4200 1900
+Connection ~ 4200 1900
+Wire Wire Line
+	4000 3550 4200 3550
+Wire Wire Line
+	4200 3550 4200 2750
+Connection ~ 4200 2750
+Wire Wire Line
+	4000 4350 4200 4350
+Wire Wire Line
+	4200 4350 4200 3550
+Connection ~ 4200 3550
+Wire Wire Line
+	3700 1900 3400 1900
+Wire Wire Line
+	3400 1900 3400 1150
+Wire Wire Line
+	3400 1150 3700 1150
+Connection ~ 3700 1150
+Wire Wire Line
+	3700 2750 3400 2750
+Wire Wire Line
+	3400 2750 3400 1900
+Connection ~ 3400 1900
+Wire Wire Line
+	3700 3550 3400 3550
+Wire Wire Line
+	3400 3550 3400 2750
+Connection ~ 3400 2750
+Wire Wire Line
+	3700 4350 3400 4350
+Wire Wire Line
+	3400 4350 3400 3550
+Connection ~ 3400 3550
+Text GLabel 4900 2700 0    50   Input ~ 0
+SDA
+Text GLabel 4900 3000 0    50   Input ~ 0
+SCL
+Text GLabel 3800 1050 1    50   Input ~ 0
+SDA
+Text GLabel 3900 1050 1    50   Input ~ 0
+SCL
+Wire Wire Line
+	3800 1150 3800 1050
+Wire Wire Line
+	3900 1150 3900 1050
+Text GLabel 3800 1800 1    50   Input ~ 0
+SDA
+Text GLabel 3900 1800 1    50   Input ~ 0
+SCL
+Text GLabel 3800 2600 1    50   Input ~ 0
+SDA
+Text GLabel 3900 2600 1    50   Input ~ 0
+SCL
+Text GLabel 3800 3450 1    50   Input ~ 0
+SDA
+Text GLabel 3900 3450 1    50   Input ~ 0
+SCL
+Text GLabel 3800 4250 1    50   Input ~ 0
+SDA
+Text GLabel 3900 4250 1    50   Input ~ 0
+SCL
+Wire Wire Line
+	3800 4350 3800 4250
+Wire Wire Line
+	3900 4350 3900 4250
+Wire Wire Line
+	3800 3550 3800 3450
+Wire Wire Line
+	3900 3550 3900 3450
+Wire Wire Line
+	3800 2750 3800 2600
+Wire Wire Line
+	3900 2750 3900 2600
+Wire Wire Line
+	3800 1900 3800 1800
+Wire Wire Line
+	3900 1900 3900 1800
+Text GLabel 6700 2800 2    50   Input ~ 0
+A0
+Wire Wire Line
+	6600 2800 6700 2800
+Text GLabel 6700 2700 2    50   Input ~ 0
+A1
+Wire Wire Line
+	6600 2700 6700 2700
+Text GLabel 6700 2500 2    50   Input ~ 0
+A3
+Wire Wire Line
+	6600 2500 6700 2500
+Text GLabel 6700 2400 2    50   Input ~ 0
+A4
+Wire Wire Line
+	6600 2400 6700 2400
+Text GLabel 6700 2300 2    50   Input ~ 0
+A5
+Wire Wire Line
+	6600 2300 6700 2300
+Text GLabel 6700 2200 2    50   Input ~ 0
+A6
+Wire Wire Line
+	6600 2200 6700 2200
+$Comp
+L Device:Buzzer BZ?
+U 1 1 5F652264
+P 7350 1800
+F 0 "BZ?" H 7502 1829 50  0000 L CNN
+F 1 "Buzzer" H 7502 1738 50  0000 L CNN
+F 2 "" V 7325 1900 50  0001 C CNN
+F 3 "~" V 7325 1900 50  0001 C CNN
+	1    7350 1800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6600 1800 6900 1800
+Wire Wire Line
+	6900 1800 6900 1600
+Wire Wire Line
+	6900 1600 7450 1600
+Wire Wire Line
+	7450 1600 7450 1700
+Wire Wire Line
+	6600 1900 6900 1900
+Wire Wire Line
+	6900 1900 6900 2050
+Wire Wire Line
+	6900 2050 7450 2050
+Wire Wire Line
+	7450 2050 7450 1900
+$Comp
+L Connector:Conn_01x05_Female J?
+U 1 1 5F65C43D
+P 5950 4100
+F 0 "J?" V 5796 4348 50  0000 L CNN
+F 1 "DS3231 (Clock)" V 5887 4348 50  0000 L CNN
+F 2 "" H 5950 4100 50  0001 C CNN
+F 3 "~" H 5950 4100 50  0001 C CNN
+	1    5950 4100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 5F65FE31
+P 5750 3700
+F 0 "#PWR?" H 5750 3550 50  0001 C CNN
+F 1 "VCC" H 5767 3873 50  0000 C CNN
+F 2 "" H 5750 3700 50  0001 C CNN
+F 3 "" H 5750 3700 50  0001 C CNN
+	1    5750 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F660235
+P 6150 3900
+F 0 "#PWR?" H 6150 3650 50  0001 C CNN
+F 1 "GND" H 6155 3727 50  0000 C CNN
+F 2 "" H 6150 3900 50  0001 C CNN
+F 3 "" H 6150 3900 50  0001 C CNN
+	1    6150 3900
+	-1   0    0    1   
+$EndComp
+Text GLabel 5950 3900 1    50   Input ~ 0
+SDA
+Text GLabel 5850 3900 1    50   Input ~ 0
+SCL
+NoConn ~ 6050 3900
+Wire Wire Line
+	5750 3700 5750 3900
+$Comp
+L Device:R R?
+U 1 1 5F665EDE
+P 5000 2400
+F 0 "R?" H 5050 2450 50  0000 L CNN
+F 1 "3.3kΩ" H 4700 2450 50  0000 L CNN
+F 2 "" V 4930 2400 50  0001 C CNN
+F 3 "~" H 5000 2400 50  0001 C CNN
+	1    5000 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F66675C
+P 5000 3350
+F 0 "R?" H 5070 3396 50  0000 L CNN
+F 1 "3.3kΩ" H 4700 3400 50  0000 L CNN
+F 2 "" V 4930 3350 50  0001 C CNN
+F 3 "~" H 5000 3350 50  0001 C CNN
+	1    5000 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 2700 5000 2700
+Wire Wire Line
+	4900 3000 5000 3000
+Wire Wire Line
+	5000 2550 5000 2700
+Connection ~ 5000 2700
+Wire Wire Line
+	5000 3000 5000 3200
+Connection ~ 5000 3000
+Wire Wire Line
+	5000 3500 4650 3500
+Wire Wire Line
+	4650 1700 5250 1700
+Wire Wire Line
+	4550 1700 4650 1700
+Connection ~ 4650 1700
+Wire Wire Line
+	4650 1700 4650 2250
+Connection ~ 4650 2250
+Wire Wire Line
+	5000 2700 5250 2700
+Wire Wire Line
+	5000 3000 5250 3000
+Wire Wire Line
+	4650 2250 4650 3500
+Wire Wire Line
+	4650 2250 5000 2250
+$EndSCHEMATC

@@ -25,4 +25,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run PlatformIO
-        run: platformio run -d /tmp/epimetheus-main
+        run: platformio run -d /tmp/epimetheus-main/arduino/epimetheus

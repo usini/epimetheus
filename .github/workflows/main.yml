@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
 
       - name: Install dependencies
         run: |
@@ -19,9 +20,7 @@ jobs:
            pip install -U platformio
            platformio upgrade
            platformio update
-           wget https://github.com/usini/epimetheus/archive/main.zip -O /tmp/main.zip
-           unzip /tmp/main.zip -d /tmp
 
       # Runs a set of commands using the runners shell
       - name: Run PlatformIO
-        run: platformio run
+        run: platformio run -d /tmp/epimetheus-main

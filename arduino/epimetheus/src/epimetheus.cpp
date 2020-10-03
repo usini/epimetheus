@@ -28,7 +28,6 @@ void setup() {
   #endif
 
   #if defined(WEB_ENABLE)
-    Serial.println("PAASSSSSSSS");
     setup_web();  // Static Web / Websocket
   #endif
 }

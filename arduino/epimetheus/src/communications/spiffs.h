@@ -12,6 +12,15 @@ void scan_local_storage() {
         }
     }
 
+    // BME280
+     for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            file.print(LANG_TEMPERATURE + DATA_SEPARATOR);
+            file.print(LANG_HUMIDITY + DATA_SEPARATOR);
+            file.print(LANG_PRESSURE + DATA_SEPARATOR);
+        }
+    }
+
     // BME680
      for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {

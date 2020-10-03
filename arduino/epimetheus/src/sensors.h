@@ -6,12 +6,11 @@
 #include "sensors/i2c_ds3231.h"    // DS3231 processing
 #include "sensors/i2c_bme680.h"    // BME680 processing
 #include "sensors/i2c_tsl2561.h"   // TSL2561 processing
+#include "sensors/i2c_bme280.h"
 
 int nb_sensors = 0;
 bool sensor_changed = false;
 bool clock_active = false;
-
-TaskHandle_t sensor_background_task;
 
 // For each sensor check I²C address and make it enable
 void refresh_sensors(bool enable, byte address) {
@@ -54,7 +53,7 @@ void refresh_sensors(bool enable, byte address) {
       }
       break;
 
-    case BME680_0_ADDR:
+    case BME680_0_ADDR: //TODO differentiate BME280/BME680
       if(enable){
         sensors_bme680_enable[0] = true;
         setup_bme680(0);
@@ -107,10 +106,12 @@ void scan_sensors() {
 void update_sensors() {
       update_tsl2561();
       update_bme680();
+      update_bme280();
       update_clock();
 }
 
 // Basic I²C setup / sensors update on CORE 0
+// TODO manage multiples I²C port / Change I²C pins
 void setup_sensors() {
-  Wire.begin(); // As for now I²C is the only sensors managed could change.
+  Wire.begin(); // As for now I²C based sensors are the only one managed.
 }

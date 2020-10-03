@@ -54,6 +54,26 @@ void update_serial() {
         }
     }
 
+    // BME280
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            Serial.printf("[BME280_%d] ", i);
+            Serial.print(LANG_TEMPERATURE + ": ");
+            Serial.print(sensors_bme280_temp[i]);
+            Serial.println( + " " + TEMP_UNIT);
+
+            Serial.printf("[BME280_%d] ", i);
+            Serial.print(LANG_HUMIDITY + ": ");
+            Serial.print(sensors_bme280_hum[i]);
+            Serial.println(" " + HUMIDITY_UNIT);
+
+            Serial.printf("[BME280_%d] ",i);
+            Serial.print(LANG_PRESSURE + ": ");
+            Serial.print(sensors_bme280_pressure[i]);
+            Serial.println(" " + PRESSURE_UNIT);
+        }
+    }
+
     // BME680
     for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {

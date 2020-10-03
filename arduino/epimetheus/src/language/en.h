@@ -8,6 +8,7 @@ const String LANG_GAS = "Gas";
 const String LANG_LIGHT = "Luminosity";
 const String LANG_SENSOR_CHANGED = "[SENSOR] Sensors has changed...";
 
+const String BME280_FULLNAME = "BME280 - Temperature, Humidity, Pressure Sensor";
 const String BME680_FULLNAME = "BME680 - Temperature, Humidity, Pressure and Gas Sensor";
 const String TSL2561_FULLNAME = "TSL2561 Digital Luminosity/Lux/Light Sensor";
 const String DS3231_FULLNAME = "DS3231 Precision RTC Breakout";

@@ -8,7 +8,8 @@ const String LANG_GAS = "Gaz";
 const String LANG_LIGHT = "Luminosité";
 const String LANG_SENSOR_CHANGED = "[SENSOR] Changement dans les capteurs...";
 
-const String BME680_FULLNAME = "BME680 - Capteur de température, humidité, de pression et de gaz";
+const String BME280_FULLNAME = "BME280 - Capteur de température, humidité, pression";
+const String BME680_FULLNAME = "BME680 - Capteur de température, humidité, pression et gaz";
 const String TSL2561_FULLNAME = "TSL2561 - Capteur de luminosité digitale";
 const String DS3231_FULLNAME = "DS3231 - Horloge Temps Réel (RCT) de précision";
 

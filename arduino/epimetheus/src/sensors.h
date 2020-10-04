@@ -17,61 +17,107 @@ void refresh_sensors(bool enable, byte address) {
 
   switch (address) {
     case TSL2561_0_ADDR:
-      if(enable){
-        sensors_tsl2561_enable[0] = true;
-        setup_tsl2561(0);
-        nb_sensors++;
+      if(enable) {
+        if(!sensors_tsl2561_enable[0]) {
+          sensors_tsl2561_enable[0] = true;
+          setup_tsl2561(0);
+          nb_sensors++;
+        } 
       } else {
-        sensors_tsl2561_enable[0] = false;
+        if(sensors_tsl2561_enable[0]) {
+          sensors_tsl2561_enable[0] = false;
+        }
       }
-      break;
+    break;
 
     case TSL2561_1_ADDR:
-      if(enable){
-        sensors_tsl2561_enable[1] = true;
-        setup_tsl2561(1);
-        nb_sensors++;
+       if(enable) {
+        if(!sensors_tsl2561_enable[1]) {
+          sensors_tsl2561_enable[1] = true;
+          setup_tsl2561(1);
+          nb_sensors++;
+        } 
       } else {
-        sensors_tsl2561_enable[1] = false;
+        if(sensors_tsl2561_enable[1]) {
+          sensors_tsl2561_enable[1] = false;
+        }
       }
-      break;
+    break;
 
     case TSL2561_2_ADDR:
-      if(enable){
-        sensors_tsl2561_enable[2] = true;
-        setup_tsl2561(2);
-        nb_sensors++;
+       if(enable) {
+        if(!sensors_tsl2561_enable[2]) {
+          sensors_tsl2561_enable[2] = true;
+          setup_tsl2561(0);
+          nb_sensors++;
+        }  
       } else {
-        sensors_tsl2561_enable[2] = false;
+        if(sensors_tsl2561_enable[2]) {
+          sensors_tsl2561_enable[2] = false;
+        }
       }
-      break;
+    break;
 
     case DS3231_ADDR:
-      if(enable){
-        sensors_ds3231_enable = true;
-        clock_active = true;
+      if(enable) {
+        if(!sensors_ds3231_enable) {
+          sensors_ds3231_enable = true;
+          clock_active = true;
+        }
+      } else {
+        if(sensors_ds3231_enable) {
+          sensors_ds3231_enable = false;
+        }
       }
-      break;
+    break;
 
-    case BME680_0_ADDR: //TODO differentiate BME280/BME680
-      if(enable){
-        sensors_bme680_enable[0] = true;
-        setup_bme680(0);
-        nb_sensors++;
+    case BME680_0_ADDR:
+      if(enable) {
+        if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0])) {   
+          if(setup_bme680(0)) {
+            sensors_bme680_enable[0] = true;
+            nb_sensors++;
+          } else {
+            sensors_bme280_enable[0] = true;
+            setup_bme280(0);
+            nb_sensors++;
+          }
+        }
       } else {
-        sensors_bme680_enable[0] = false;
+        if(sensors_bme680_enable[0]) {
+          Serial.println("DEACTIVATED BME680");
+          sensors_bme680_enable[0] = false;
+        }
+        if(sensors_bme280_enable[0]) {
+          Serial.println("DEACTIVATED BME280");
+          sensors_bme280_enable[0] = false;
+        }
       }
+    break;
+
     case BME680_1_ADDR:
-      if(enable){
-        sensors_bme680_enable[1] = true;
-        setup_bme680(1);
-        nb_sensors++;
+       if(enable) {
+        if((!sensors_bme680_enable[1]) && (!sensors_bme280_enable[1])) {   
+          if(setup_bme680(1)) {
+            sensors_bme680_enable[1] = true;
+            nb_sensors++;
+          } else {
+            sensors_bme280_enable[1] = true;
+            setup_bme280(1);
+            nb_sensors++;
+          }
+        }
       } else {
-        sensors_bme680_enable[1] = false;
+        if(sensors_bme680_enable[1]) {
+          sensors_bme680_enable[1] = false;
+        } else {
+          sensors_bme280_enable[1] = false;
+        }
       }
-      break;
+    break;
+    
     default:
-      if(enable){
+      if(enable) {
         Serial.print("[0x");
         Serial.print(address, HEX);
         Serial.println("] Unknown I²C device");
@@ -88,13 +134,12 @@ void scan_sensors() {
   for (address = 1; address < 127; address++ ) {
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
-    bool error_state;
-    if (error == 0) {
-      error_state = true;
+
+    if ((error == 0) || (error == 4)) {
+      refresh_sensors(true, address);
     } else {
-      error_state = false;
+      refresh_sensors(false, address);
     }
-    refresh_sensors(error_state, address);
   }
   if(nb_sensors != last_nb_sensors) {
     Serial.println(LANG_SENSOR_CHANGED);

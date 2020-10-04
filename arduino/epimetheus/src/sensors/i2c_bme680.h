@@ -4,14 +4,12 @@
   Library  : Adafruit BME680 
 */
 
-//TODO Find a way to differentiate BME280/BME680
-
 #include "Adafruit_BME680.h"
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 Adafruit_BME680 sensors_bme680[2];
 
-void setup_bme680(int id) {
+bool setup_bme680(int id) {
   byte address = 0x00;
   if(id == 0){
     address = BME680_0_ADDR;
@@ -19,12 +17,17 @@ void setup_bme680(int id) {
     address = BME680_1_ADDR;
   }
 
-  sensors_bme680[id].begin(address);
-  sensors_bme680[id].setTemperatureOversampling(BME680_OS_16X);
-  sensors_bme680[id].setHumidityOversampling(BME680_OS_16X);
-  sensors_bme680[id].setPressureOversampling(BME680_OS_4X);
-  sensors_bme680[id].setIIRFilterSize(BME680_FILTER_SIZE_3);
-  sensors_bme680[id].setGasHeater(320, 150); // 320*C for 150 ms
+  bool check = false;
+  check = sensors_bme680[id].begin(address);
+ 
+  if(check){
+    sensors_bme680[id].setTemperatureOversampling(BME680_OS_16X);
+    sensors_bme680[id].setHumidityOversampling(BME680_OS_16X);
+    sensors_bme680[id].setPressureOversampling(BME680_OS_4X);
+    sensors_bme680[id].setIIRFilterSize(BME680_FILTER_SIZE_3);
+    sensors_bme680[id].setGasHeater(320, 150); // 320*C for 150 ms
+  }
+  return check;
 }
 
 void update_bme680() {

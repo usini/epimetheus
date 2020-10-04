@@ -138,6 +138,21 @@ void scan_serial() {
         }
     }
 
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            Serial.print("[0x");
+            switch(i) {
+                case 0:
+                    Serial.print(BME280_0_ADDR, HEX);
+                break;
+                case 1:
+                    Serial.print(BME280_1_ADDR, HEX);
+                break;
+            }
+            Serial.println("] " + BME280_FULLNAME + " - " + BME280_LINK);
+        }
+    }
+
     if(sensors_ds3231_enable) {
         Serial.print("[0x");
         Serial.print(DS3231_ADDR, HEX);

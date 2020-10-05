@@ -12,15 +12,6 @@ void scan_local_storage() {
         }
     }
 
-    // BME280
-     for(int i = 0; i<2; i++) {
-        if(sensors_bme280_enable[i]) {
-            file.print(LANG_TEMPERATURE + DATA_SEPARATOR);
-            file.print(LANG_HUMIDITY + DATA_SEPARATOR);
-            file.print(LANG_PRESSURE + DATA_SEPARATOR);
-        }
-    }
-
     // BME680
      for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {
@@ -28,6 +19,22 @@ void scan_local_storage() {
             file.print(LANG_HUMIDITY + DATA_SEPARATOR);
             file.print(LANG_PRESSURE + DATA_SEPARATOR);
             file.print(LANG_GAS + DATA_SEPARATOR);
+        }
+    }
+
+    // BME280
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            file.print(LANG_TEMPERATURE + DATA_SEPARATOR);
+            file.print(LANG_HUMIDITY + DATA_SEPARATOR);
+            file.print(LANG_PRESSURE + DATA_SEPARATOR);
+        }
+    }
+
+    // BH1750
+    for(int i = 0; i<2; i++) {
+        if(sensors_bh1750_enable[i]){
+            file.print(LANG_LIGHT + DATA_SEPARATOR);
         }
     }
     file.println();
@@ -75,7 +82,7 @@ void update_local_storage() {
     }
 
     //BME680
-     for(int i = 0; i<2; i++) {
+    for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {
             file.print(sensors_bme680_temp[i] + DATA_SEPARATOR);
             file.print(sensors_bme680_hum[i] + DATA_SEPARATOR);
@@ -83,5 +90,22 @@ void update_local_storage() {
             file.print(sensors_bme680_gas[i] + DATA_SEPARATOR);
         }
     }
+
+    //BME280
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            file.print(sensors_bme280_temp[i] + DATA_SEPARATOR);
+            file.print(sensors_bme280_hum[i] + DATA_SEPARATOR);
+            file.print(sensors_bme280_pressure[i] + DATA_SEPARATOR);
+        }
+    }
+
+    //BH1750
+    for(int i = 0; i<3; i++) {
+        if(sensors_bh1750_enable[i]) {
+            file.print(sensors_bh1750_lux[i] + DATA_SEPARATOR);
+        }
+    }
+
     file.println();
 }

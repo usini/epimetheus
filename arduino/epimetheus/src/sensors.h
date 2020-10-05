@@ -7,6 +7,7 @@
 #include "sensors/i2c_bme680.h"    // BME680 processing
 #include "sensors/i2c_tsl2561.h"   // TSL2561 processing
 #include "sensors/i2c_bme280.h"
+#include "sensors/i2c_bh1750.h"
 
 int nb_sensors = 0;
 bool sensor_changed = false;
@@ -16,6 +17,35 @@ bool clock_active = false;
 void refresh_sensors(bool enable, byte address) {
 
   switch (address) {
+    case BH1750_0_ADDR:
+      if(enable) {
+        if(!sensors_bh1750_enable[0]) {
+          sensors_bh1750_enable[0] = true;
+          setup_bh1750(0);
+          nb_sensors++;
+        } 
+      } else {
+        if(sensors_bh1750_enable[0]) {
+          sensors_bh1750_enable[0] = false;
+        }
+      }
+    break;
+
+    case BH1750_1_ADDR:
+       if(enable) {
+        if(!sensors_bh1750_enable[1]) {
+          sensors_bh1750_enable[1] = true;
+          setup_bh1750(1);
+          nb_sensors++;
+        } 
+      } else {
+        if(sensors_bh1750_enable[1]) {
+          sensors_bh1750_enable[1] = false;
+        }
+      }
+    break;
+    
+    
     case TSL2561_0_ADDR:
       if(enable) {
         if(!sensors_tsl2561_enable[0]) {
@@ -85,11 +115,9 @@ void refresh_sensors(bool enable, byte address) {
         }
       } else {
         if(sensors_bme680_enable[0]) {
-          Serial.println("DEACTIVATED BME680");
           sensors_bme680_enable[0] = false;
         }
         if(sensors_bme280_enable[0]) {
-          Serial.println("DEACTIVATED BME280");
           sensors_bme280_enable[0] = false;
         }
       }
@@ -152,6 +180,7 @@ void update_sensors() {
       update_tsl2561();
       update_bme680();
       update_bme280();
+      update_bh1750();
       update_clock();
 }
 

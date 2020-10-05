@@ -8,10 +8,11 @@ const String LANG_GAS = "Gaz";
 const String LANG_LIGHT = "Luminosité";
 const String LANG_SENSOR_CHANGED = "[SENSOR] Changement dans les capteurs...";
 
-const String BME280_FULLNAME = "BME280 - Capteur de température, humidité, pression";
-const String BME680_FULLNAME = "BME680 - Capteur de température, humidité, pression et gaz";
-const String TSL2561_FULLNAME = "TSL2561 - Capteur de luminosité digitale";
-const String DS3231_FULLNAME = "DS3231 - Horloge Temps Réel (RCT) de précision";
+const String LANG_BME280_FULLNAME = "BME280 - Capteur de température, humidité, pression";
+const String LANG_BME680_FULLNAME = "BME680 - Capteur de température, humidité, pression et gaz";
+const String LANG_TSL2561_FULLNAME = "TSL2561 - Capteur de luminosité digitale";
+const String LANG_DS3231_FULLNAME = "DS3231 - Horloge Temps Réel (RCT) de précision";
+const String LANG_BH1750_FULLNAME = "BH1750 - Capteur de luminosité";
 
 const String LANG_DS3231 = "DS3231";
 const String LANG_DS3231_ERROR = "[HORLOGE] Erreur d'initialisation de l'horloge";

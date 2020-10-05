@@ -216,6 +216,24 @@ void scan_websocket(AsyncWebSocketClient * client) {
         id++;
        }
     }
+
+    for(int i = 0; i<3; i++) {
+      if(sensors_bh1750_enable[i]) {
+        StaticJsonDocument<512> bh1750;
+        bh1750["msg"] = "list";
+        bh1750["result"] = true;
+        bh1750["id"] = id;
+        sensor_name = "BH1750_" + String(i);
+        bh1750["sensor"] = sensor_name;
+        bh1750["text"] = LANG_LIGHT;
+        bh1750["unit"] = LUX_UNIT;
+        bh1750["color"] = LUX_COLOR;
+        bh1750["type"] = LUX_TYPE;
+        id++;
+        serializeJson(bh1750, buffer_websocket);
+        client->text(buffer_websocket);
+      }
+    }
   
 }
 
@@ -223,25 +241,33 @@ void scan_websocket(AsyncWebSocketClient * client) {
 String update_websocket() {
    String data = "";
    for(int i = 0; i<3; i++) {
-     if(sensors_tsl2561_enable[i]){
+     if(sensors_tsl2561_enable[i]) {
        data = data + sensors_tsl2561_lux[i] + ";";
      }
    }
+
    for(int i = 0; i<2; i++) {
-      if(sensors_bme680_enable[i]){
+      if(sensors_bme680_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
         data = data + sensors_bme680_hum[i] + ";";
         data = data + sensors_bme680_pressure[i] + ";";
         data = data + sensors_bme680_gas[i] + ";";
       }
    }
+
    for(int i = 0; i<2; i++) {
-      if(sensors_bme280_enable[i]){
+      if(sensors_bme280_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
         data = data + sensors_bme680_hum[i] + ";";
         data = data + sensors_bme680_pressure[i] + ";";
         data = data + sensors_bme680_gas[i] + ";";
       }
+   }
+
+   for(int i = 0; i<3; i++) {
+     if(sensors_bh1750_enable[i]) {
+       data = data + sensors_bh1750_lux[i] + ";";
+     }
    }
 
    data.remove(data.length() -1 , data.length());

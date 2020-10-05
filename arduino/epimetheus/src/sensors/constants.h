@@ -28,7 +28,15 @@ volatile float sensors_bme680_hum[2];
 volatile float sensors_bme680_pressure[2];
 uint32_t sensors_bme680_gas[2];
 
-/* DS3231 - DS3231 Precision RTC Breakout - https://www.adafruit.com/product/3013 */
+/* DS3231 - Precision RTC Breakout - https://www.adafruit.com/product/3013 */
 const byte DS3231_ADDR = 0x68;
 const String DS3231_LINK = "https://www.adafruit.com/product/3013";
 bool sensors_ds3231_enable = false;
+
+/* BH1750 -Light Sensor - https://www.adafruit.com/product/4681 */
+const byte BH1750_0_ADDR = 0x5C;
+const byte BH1750_1_ADDR = 0x23;
+const String BH1750_LINK = "https://www.adafruit.com/product/4681";
+
+bool sensors_bh1750_enable[2] = {false, false};
+volatile float sensors_bh1750_lux[2];

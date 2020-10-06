@@ -35,7 +35,7 @@ void update_max30102() {
             max30102_beatsPerMinute = 60 / (delta / 1000.0);
             Serial.println(max30102_beatsPerMinute);
             //sensors_max30102_bpm = beatsPerMinute;
-            if (max30102_beatsPerMinute < 255 && max30102_beatsPerMinute > 20)
+            if (max30102_beatsPerMinute < 200 && max30102_beatsPerMinute > 40)
             {
                 max30102_rates[max30102_rateSpot++] = (byte)max30102_beatsPerMinute; //Store this reading in the array
                 max30102_rateSpot %= MAX30102_RATE_SIZE; //Wrap variable

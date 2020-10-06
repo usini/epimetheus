@@ -12,6 +12,7 @@ const String LANG_GYRO = "Gyroscope";
 
 const String LANG_SENSOR_CHANGED = "[SENSOR] Sensors has changed...";
 
+const String LANG_BMP280_FULLNAME = "BMP280 - Temperature, Pressure Sensor";
 const String LANG_BME280_FULLNAME = "BME280 - Temperature, Humidity, Pressure Sensor";
 const String LANG_BME680_FULLNAME = "BME680 - Temperature, Humidity, Pressure and Gas Sensor";
 const String LANG_TSL2561_FULLNAME = "TSL2561 - Digital Luminosity/Lux/Light Sensor";

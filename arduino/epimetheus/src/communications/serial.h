@@ -55,6 +55,41 @@ void update_serial() {
         }
     }
 
+    // BMP280
+    for(int i = 0; i<2; i++) {
+        if(sensors_bmp280_enable[i]) {
+            Serial.printf("[BMP280_%d] ", i);
+            Serial.print(LANG_TEMPERATURE + ": ");
+            Serial.print(sensors_bmp280_temp[i]);
+            Serial.println( + " " + TEMP_UNIT);
+
+            Serial.printf("[BMP280_%d] ",i);
+            Serial.print(LANG_PRESSURE + ": ");
+            Serial.print(sensors_bmp280_pressure[i]);
+            Serial.println(" " + PRESSURE_UNIT);
+        }
+    }
+
+    // BME280
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme280_enable[i]) {
+            Serial.printf("[BME280_%d] ", i);
+            Serial.print(LANG_TEMPERATURE + ": ");
+            Serial.print(sensors_bme280_temp[i]);
+            Serial.println( + " " + TEMP_UNIT);
+
+            Serial.printf("[BME280_%d] ", i);
+            Serial.print(LANG_HUMIDITY + ": ");
+            Serial.print(sensors_bme280_hum[i]);
+            Serial.println(" " + HUMIDITY_UNIT);
+
+            Serial.printf("[BME280_%d] ",i);
+            Serial.print(LANG_PRESSURE + ": ");
+            Serial.print(sensors_bme280_pressure[i]);
+            Serial.println(" " + PRESSURE_UNIT);
+        }
+    }
+
     // BME680
     for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {
@@ -77,26 +112,6 @@ void update_serial() {
             Serial.print(LANG_GAS + ": ");
             Serial.print(sensors_bme680_gas[i]);
             Serial.println(" " + GAS_UNIT);
-        }
-    }
-
-    // BME280
-    for(int i = 0; i<2; i++) {
-        if(sensors_bme280_enable[i]) {
-            Serial.printf("[BME280_%d] ", i);
-            Serial.print(LANG_TEMPERATURE + ": ");
-            Serial.print(sensors_bme280_temp[i]);
-            Serial.println( + " " + TEMP_UNIT);
-
-            Serial.printf("[BME280_%d] ", i);
-            Serial.print(LANG_HUMIDITY + ": ");
-            Serial.print(sensors_bme280_hum[i]);
-            Serial.println(" " + HUMIDITY_UNIT);
-
-            Serial.printf("[BME280_%d] ",i);
-            Serial.print(LANG_PRESSURE + ": ");
-            Serial.print(sensors_bme280_pressure[i]);
-            Serial.println(" " + PRESSURE_UNIT);
         }
     }
 
@@ -182,21 +197,22 @@ void scan_serial() {
         }
     }
 
-    // BME680
+  
+    // BMP280
     for(int i = 0; i<2; i++) {
-        if(sensors_bme680_enable[i]) {
+        if(sensors_bmp280_enable[i]) {
             Serial.print("[0x");
             switch(i) {
                 case 0:
-                    Serial.print(BME680_0_ADDR, HEX);
+                    Serial.print(BMP280_0_ADDR, HEX);
                 break;
                 case 1:
-                    Serial.print(BME680_1_ADDR, HEX);
+                    Serial.print(BMP280_1_ADDR, HEX);
                 break;
             }
-            Serial.println("] " + LANG_BME680_FULLNAME + " - " + BME680_LINK);
+            Serial.println("] " + LANG_BMP280_FULLNAME + " - " + BMP280_LINK);
         }
-    }
+    }  
 
     // BME280
     for(int i = 0; i<2; i++) {
@@ -211,6 +227,22 @@ void scan_serial() {
                 break;
             }
             Serial.println("] " + LANG_BME280_FULLNAME + " - " + BME280_LINK);
+        }
+    }
+
+    // BME680
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme680_enable[i]) {
+            Serial.print("[0x");
+            switch(i) {
+                case 0:
+                    Serial.print(BME680_0_ADDR, HEX);
+                break;
+                case 1:
+                    Serial.print(BME680_1_ADDR, HEX);
+                break;
+            }
+            Serial.println("] " + LANG_BME680_FULLNAME + " - " + BME680_LINK);
         }
     }
 

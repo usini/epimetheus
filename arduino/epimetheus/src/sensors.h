@@ -3,10 +3,11 @@
 #include <Wire.h>              // I²C Manager
 #include <Adafruit_Sensor.h>   // Adafruit Sensor Manager
 #include "sensors/constants.h" // Constants (and variables) for sensors
-#include "sensors/i2c_ds3231.h"    // DS3231 processing
-#include "sensors/i2c_bme680.h"    // BME680 processing
-#include "sensors/i2c_tsl2561.h"   // TSL2561 processing
+#include "sensors/i2c_ds3231.h"
+#include "sensors/i2c_bmp280.h"
 #include "sensors/i2c_bme280.h"
+#include "sensors/i2c_bme680.h"    
+#include "sensors/i2c_tsl2561.h"
 #include "sensors/i2c_bh1750.h"
 #include "sensors/i2c_max30102.h"
 #include "sensors/i2c_mpu6050.h"
@@ -143,43 +144,64 @@ void refresh_sensors(bool enable, byte address) {
 
     case BME680_0_ADDR: // Address Conflict with BME280
       if(enable) {
-        if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0])) {   
+        if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0]) && (!sensors_bmp280_enable[0])) {   
           if(setup_bme680(0)) {
             sensors_bme680_enable[0] = true;
             nb_sensors++;
           } else {
-            sensors_bme280_enable[0] = true;
-            setup_bme280(0);
-            nb_sensors++;
+            if(setup_bmp280(0)) {
+              sensors_bmp280_enable[0] = true;
+              nb_sensors++;
+            } else {
+              sensors_bme280_enable[0] = true;
+              setup_bme280(0);
+              nb_sensors++;
+              }
           }
         }
       } else {
-        if(sensors_bme680_enable[0]) {
-          sensors_bme680_enable[0] = false;
+        if(sensors_bmp280_enable[0]) {
+          sensors_bmp280_enable[0] = false;
         }
+
         if(sensors_bme280_enable[0]) {
           sensors_bme280_enable[0] = false;
+        }
+
+        if(sensors_bme680_enable[0]) {
+          sensors_bme680_enable[0] = false;
         }
       }
     break;
 
     case BME680_1_ADDR:
-       if(enable) {
-        if((!sensors_bme680_enable[1]) && (!sensors_bme280_enable[1])) {   
+      if(enable) {
+        if((!sensors_bme680_enable[1]) && (!sensors_bme280_enable[1]) && (!sensors_bmp280_enable[1])) {   
           if(setup_bme680(1)) {
             sensors_bme680_enable[1] = true;
             nb_sensors++;
           } else {
-            sensors_bme280_enable[1] = true;
-            setup_bme280(1);
-            nb_sensors++;
+            if(setup_bmp280(1)) {
+              sensors_bmp280_enable[1] = true;
+              nb_sensors++;
+            } else {
+              sensors_bme280_enable[1] = true;
+              setup_bme280(1);
+              nb_sensors++;
+              }
           }
         }
       } else {
+        if(sensors_bmp280_enable[1]) {
+          sensors_bmp280_enable[1] = false;
+        }
+
+        if(sensors_bme280_enable[1]) {
+          sensors_bme280_enable[1] = false;
+        }
+
         if(sensors_bme680_enable[1]) {
           sensors_bme680_enable[1] = false;
-        } else {
-          sensors_bme280_enable[1] = false;
         }
       }
     break;
@@ -218,8 +240,9 @@ void scan_sensors() {
 // Get value from sensors
 void update_sensors() {
       update_tsl2561();
-      update_bme680();
+      update_bmp280();
       update_bme280();
+      update_bme680();
       update_bh1750();
       update_max30102();
       update_mpu6050();

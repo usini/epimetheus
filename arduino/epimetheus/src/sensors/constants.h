@@ -7,6 +7,15 @@ const String TSL2561_LINK = "https://www.adafruit.com/product/439";
 bool sensors_tsl2561_enable[3] = {false, false, false};
 volatile int sensors_tsl2561_lux[3];
 
+/* BMP280 - Temperature, Pressure Sensor https://learn.adafruit.com/adafruit-bmp280-barometric-pressure-plus-temperature-sensor-breakout/ */ 
+const byte BMP280_0_ADDR = 0x76;
+const byte BMP280_1_ADDR = 0x77;
+const String BMP280_LINK = "https://www.adafruit.com/product/2651";
+
+bool sensors_bmp280_enable[2] = {false, false};
+volatile float sensors_bmp280_temp[2];
+volatile float sensors_bmp280_pressure[2];
+
 /* BME280 - Temperature, Humidity, Pressure Sensor https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout */ 
 const byte BME280_0_ADDR = 0x76;
 const byte BME280_1_ADDR = 0x77;

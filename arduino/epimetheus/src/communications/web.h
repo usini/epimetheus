@@ -118,6 +118,83 @@ void scan_websocket(AsyncWebSocketClient * client) {
       }
     }
   
+    // BMP280
+    for(int i = 0; i<2; i++) {
+       if(sensors_bmp280_enable[i]) {
+        sensor_name = "BMP280_" + String(i);
+        StaticJsonDocument<512> bmp280_temp;  
+        bmp280_temp["msg"] = "list";
+        bmp280_temp["result"] = true;
+        bmp280_temp["id"] = id;
+        bmp280_temp["sensor"] = sensor_name;
+        bmp280_temp["text"] = LANG_TEMPERATURE;
+        bmp280_temp["unit"] = TEMP_UNIT;
+        bmp280_temp["color"] = TEMP_COLOR;
+        bmp280_temp["type"] = TEMP_TYPE;
+        serializeJson(bmp280_temp, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> bmp280_pressure;  
+        bmp280_pressure["msg"] = "list";
+        bmp280_pressure["result"] = true;
+        bmp280_pressure["id"] = id;
+        bmp280_pressure["sensor"] = sensor_name;
+        bmp280_pressure["text"] = LANG_PRESSURE;
+        bmp280_pressure["unit"] = PRESSURE_UNIT;
+        bmp280_pressure["color"] = PRESSURE_COLOR;
+        bmp280_pressure["type"] = PRESSURE_TYPE;
+        serializeJson(bmp280_pressure, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+       }
+    }
+
+    // BME280
+    for(int i = 0; i<2; i++) {
+       if(sensors_bme280_enable[i]) {
+        sensor_name = "BME280_" + String(i);
+        StaticJsonDocument<512> bme280_temp;  
+        bme280_temp["msg"] = "list";
+        bme280_temp["result"] = true;
+        bme280_temp["id"] = id;
+        bme280_temp["sensor"] = sensor_name;
+        bme280_temp["text"] = LANG_TEMPERATURE;
+        bme280_temp["unit"] = TEMP_UNIT;
+        bme280_temp["color"] = TEMP_COLOR;
+        bme280_temp["type"] = TEMP_TYPE;
+        serializeJson(bme280_temp, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> bme280_humidity;  
+        bme280_humidity["msg"] = "list";
+        bme280_humidity["result"] = true;
+        bme280_humidity["id"] = id;
+        bme280_humidity["sensor"] = sensor_name;
+        bme280_humidity["text"] = LANG_HUMIDITY;
+        bme280_humidity["unit"] = HUMIDITY_UNIT;
+        bme280_humidity["color"] = HUMIDITY_COLOR;
+        bme280_humidity["type"] = HUMIDITY_TYPE;
+        serializeJson(bme280_humidity, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> bme280_pressure;  
+        bme280_pressure["msg"] = "list";
+        bme280_pressure["result"] = true;
+        bme280_pressure["id"] = id;
+        bme280_pressure["sensor"] = sensor_name;
+        bme280_pressure["text"] = LANG_PRESSURE;
+        bme280_pressure["unit"] = PRESSURE_UNIT;
+        bme280_pressure["color"] = PRESSURE_COLOR;
+        bme280_pressure["type"] = PRESSURE_TYPE;
+        serializeJson(bme280_pressure, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+       }
+    }
+
     // BME680
     for(int i = 0; i<2; i++) {
        if(sensors_bme680_enable[i]) {
@@ -171,51 +248,6 @@ void scan_websocket(AsyncWebSocketClient * client) {
         bme680_gas["color"] = GAS_COLOR;
         bme680_gas["type"] = GAS_TYPE;
         serializeJson(bme680_gas, buffer_websocket);
-        client->text(buffer_websocket);
-        id++;
-       }
-    }
-
-    // BME280
-    for(int i = 0; i<2; i++) {
-       if(sensors_bme280_enable[i]) {
-        sensor_name = "BME280_" + String(i);
-        StaticJsonDocument<512> bme280_temp;  
-        bme280_temp["msg"] = "list";
-        bme280_temp["result"] = true;
-        bme280_temp["id"] = id;
-        bme280_temp["sensor"] = sensor_name;
-        bme280_temp["text"] = LANG_TEMPERATURE;
-        bme280_temp["unit"] = TEMP_UNIT;
-        bme280_temp["color"] = TEMP_COLOR;
-        bme280_temp["type"] = TEMP_TYPE;
-        serializeJson(bme280_temp, buffer_websocket);
-        client->text(buffer_websocket);
-        id++;
-
-        StaticJsonDocument<512> bme280_humidity;  
-        bme280_humidity["msg"] = "list";
-        bme280_humidity["result"] = true;
-        bme280_humidity["id"] = id;
-        bme280_humidity["sensor"] = sensor_name;
-        bme280_humidity["text"] = LANG_HUMIDITY;
-        bme280_humidity["unit"] = HUMIDITY_UNIT;
-        bme280_humidity["color"] = HUMIDITY_COLOR;
-        bme280_humidity["type"] = HUMIDITY_TYPE;
-        serializeJson(bme280_humidity, buffer_websocket);
-        client->text(buffer_websocket);
-        id++;
-
-        StaticJsonDocument<512> bme280_pressure;  
-        bme280_pressure["msg"] = "list";
-        bme280_pressure["result"] = true;
-        bme280_pressure["id"] = id;
-        bme280_pressure["sensor"] = sensor_name;
-        bme280_pressure["text"] = LANG_PRESSURE;
-        bme280_pressure["unit"] = PRESSURE_UNIT;
-        bme280_pressure["color"] = PRESSURE_COLOR;
-        bme280_pressure["type"] = PRESSURE_TYPE;
-        serializeJson(bme280_pressure, buffer_websocket);
         client->text(buffer_websocket);
         id++;
        }
@@ -367,9 +399,17 @@ String update_websocket() {
      }
    }
 
-   // BME680
+   // BMP280
    for(int i = 0; i<2; i++) {
-      if(sensors_bme680_enable[i]) {
+      if(sensors_bmp280_enable[i]) {
+        data = data + sensors_bmp280_temp[i] + ";";
+        data = data + sensors_bmp280_pressure[i] + ";";
+      }
+   }
+
+   // BME280
+   for(int i = 0; i<2; i++) {
+      if(sensors_bme280_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
         data = data + sensors_bme680_hum[i] + ";";
         data = data + sensors_bme680_pressure[i] + ";";
@@ -377,9 +417,9 @@ String update_websocket() {
       }
    }
 
-   // BME280
+   // BME680
    for(int i = 0; i<2; i++) {
-      if(sensors_bme280_enable[i]) {
+      if(sensors_bme680_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
         data = data + sensors_bme680_hum[i] + ";";
         data = data + sensors_bme680_pressure[i] + ";";

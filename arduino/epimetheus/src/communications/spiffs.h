@@ -60,7 +60,6 @@ void scan_local_storage() {
     file.close();
 }
 
-// TODO
 void update_local_storage() {
     File file = SPIFFS.open("/data.csv", FILE_APPEND);
 
@@ -100,13 +99,11 @@ void update_local_storage() {
         }
     }
 
-    // BME680
+    // BMP280
     for(int i = 0; i<2; i++) {
-        if(sensors_bme680_enable[i]) {
-            file.print(sensors_bme680_temp[i] + DATA_SEPARATOR);
-            file.print(sensors_bme680_hum[i] + DATA_SEPARATOR);
-            file.print(sensors_bme680_pressure[i] + DATA_SEPARATOR);
-            file.print(sensors_bme680_gas[i] + DATA_SEPARATOR);
+        if(sensors_bmp280_enable[i]) {
+            file.print(sensors_bmp280_temp[i] + DATA_SEPARATOR);
+            file.print(sensors_bmp280_pressure[i] + DATA_SEPARATOR);
         }
     }
 
@@ -116,6 +113,16 @@ void update_local_storage() {
             file.print(sensors_bme280_temp[i] + DATA_SEPARATOR);
             file.print(sensors_bme280_hum[i] + DATA_SEPARATOR);
             file.print(sensors_bme280_pressure[i] + DATA_SEPARATOR);
+        }
+    }
+
+    // BME680
+    for(int i = 0; i<2; i++) {
+        if(sensors_bme680_enable[i]) {
+            file.print(sensors_bme680_temp[i] + DATA_SEPARATOR);
+            file.print(sensors_bme680_hum[i] + DATA_SEPARATOR);
+            file.print(sensors_bme680_pressure[i] + DATA_SEPARATOR);
+            file.print(sensors_bme680_gas[i] + DATA_SEPARATOR);
         }
     }
 

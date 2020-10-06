@@ -35,7 +35,7 @@ void loop() {
   // Webserver / Websocket is async not need to update in loop
   update_sensors(); //Get new values from sensors  
   
-  //Each timerDelay_update update sensors
+  //Each timerDelay_update display data
   if ((millis() - lastTime_update) > timerDelay_update) {
     debug_serial_start();
     scan_serial();

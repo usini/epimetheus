@@ -1,7 +1,8 @@
 var ws = new WebSocket("ws://" + location.host + "/websocket");
 websocket_status = false;
 var chart_0_ctx = document.getElementById("chart_0").getContext('2d');
- // https://www.chartjs.org/docs/latest/getting-started/usage.html
+
+// https://www.chartjs.org/docs/latest/getting-started/usage.html
  chart_0 = new Chart(chart_0_ctx, {
     // The type of chart we want to create
     type: 'line',
@@ -11,7 +12,19 @@ var chart_0_ctx = document.getElementById("chart_0").getContext('2d');
         datasets: []
     },
     // Configuration options go here
-    options: {}
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        second: "h:mm:ss a"
+                    },
+                },
+                distribution: "linear"
+            }]
+        }
+    }
 });
 time = "";
 
@@ -110,7 +123,6 @@ ws.onmessage=function(event) {
             } else {
                 show_error(LANG_NAME_SAVED_ERROR);
             }
-
         }
         if(data.msg == "get_clock") {
             var date_local = new Date();
@@ -122,7 +134,7 @@ ws.onmessage=function(event) {
         }
     } else {
         //console.log("Parsing data...");
-        chart_0.data.labels.push(time)
+        chart_0.data.labels.push(new Date());
         //console.log(event.data);
         data = event.data.split(';');
         //console.log(data.length);
@@ -131,6 +143,7 @@ ws.onmessage=function(event) {
             chart_0.data.datasets[index].data.push(item);           
         });
         chart_0.update();
+        mean_chart();
     }
 }
 
@@ -182,3 +195,64 @@ name_input.addEventListener("keydown", function(event){
         ws.send(JSON.stringify(response));
     }
 });
+
+function mean_chart() {
+    mean_each = 10;
+    mean_data_until = 50;
+    mean_at = 100;
+    if(chart_0.data.labels.length > mean_at) {
+        
+        //Réduction de l'échelle de temps
+        //Gardez l'heure pour mean_at valeur puis a keep_last_data garder toutes les temps
+        time_labels = mean_time(chart_0.data.labels, mean_data_until, mean_each);
+        
+        chart_0.chart.data.datasets.forEach(function(dataset,dataset_index) {
+            chart_0.chart.data.datasets[dataset_index].data = mean_data(dataset.data, mean_data_until, mean_each);
+        });
+
+        chart_0.data.labels = time_labels;
+        console.log("TIME LABELS :" + time_labels.length);
+        console.log("CHART DATA:" + chart_0.chart.data.datasets[0].data.length);
+    } else {
+        console.log("Pas assez de valeurs pour faire une moyenne");
+        console.log(chart_0.data.labels.length);
+    }
+}
+
+function mean_time(time_array, mean_data_until, mean_each) {
+    time_labels = [];
+    time_value = 0;
+    time_labels.push(time_array[0]);
+    do_not_mean_at = (time_array.length - mean_data_until);
+    for (const [index, value] of time_array.entries()) {
+        if(index < do_not_mean_at) {
+            if(time_value == mean_each) {
+                time_labels.push(value);
+                time_value = 0;
+            }
+            time_value++;
+        } else {
+            time_labels.push(value);
+        }
+    }
+    return time_labels;
+}
+
+function mean_data(data_array, mean_data_until, mean_each) {
+    temp_array = [];
+    mean_array = [];
+    for (const [index, value] of data_array.entries()) {
+        //Keep last 50 data points
+        if(index >= (data_array.length - mean_data_until)) {
+            mean_array.push(value);
+        } else {
+            temp_array.push(value);
+            if(temp_array.length == mean_each) { // We get 10 value
+                sum = (temp_array.reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }, 0) / temp_array.length).toFixed(2)
+                mean_array.push(sum); // Add value to mean array
+                temp_array.length = 0; 
+            }
+        }
+    }
+    return mean_array;
+}

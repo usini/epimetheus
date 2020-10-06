@@ -244,7 +244,7 @@ def echo(ws):
                     response = {}
                     response["msg"] = "set_clock"
                     response["result"] = True
-                    print(json_data);
+                    print(json_data)
                     ws.send(json.dumps(response))
                 else:
                     print("Incorrect JSON")

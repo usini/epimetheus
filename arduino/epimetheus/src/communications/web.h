@@ -98,6 +98,8 @@ void scan_websocket(AsyncWebSocketClient * client) {
     int id = 0;
     char buffer_websocket[4096];
     String sensor_name = "";
+
+    // TSL2561
     for(int i = 0; i<3; i++) {
       if(sensors_tsl2561_enable[i]) {
         StaticJsonDocument<512> tsl2561;
@@ -116,6 +118,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
       }
     }
   
+    // BME680
     for(int i = 0; i<2; i++) {
        if(sensors_bme680_enable[i]) {
         sensor_name = "BME680_" + String(i);
@@ -173,6 +176,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
        }
     }
 
+    // BME280
     for(int i = 0; i<2; i++) {
        if(sensors_bme280_enable[i]) {
         sensor_name = "BME280_" + String(i);
@@ -217,7 +221,8 @@ void scan_websocket(AsyncWebSocketClient * client) {
        }
     }
 
-    for(int i = 0; i<3; i++) {
+    // BH1750
+    for(int i = 0; i<2; i++) {
       if(sensors_bh1750_enable[i]) {
         StaticJsonDocument<512> bh1750;
         bh1750["msg"] = "list";
@@ -234,18 +239,38 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
       }
     }
-  
+
+    //MAX30102
+    if(sensors_max30102_enable) {
+        StaticJsonDocument<512> max30102;
+        max30102["msg"] = "list";
+        max30102["result"] = true;
+        max30102["id"] = 0;
+        sensor_name = "MAX30102";
+        max30102["sensor"] = sensor_name;
+        max30102["text"] = LANG_BPM;
+        max30102["unit"] = BPM_UNIT;
+        max30102["color"] = BPM_COLOR;
+        max30102["type"] = BPM_TYPE;
+        id++;
+        serializeJson(max30102, buffer_websocket);
+        client->text(buffer_websocket);
+    } 
 }
 
 // Send Data from sensors (not JSON to improve performance)
 String update_websocket() {
+
    String data = "";
+
+   // TSL2561
    for(int i = 0; i<3; i++) {
      if(sensors_tsl2561_enable[i]) {
        data = data + sensors_tsl2561_lux[i] + ";";
      }
    }
 
+   // BME680
    for(int i = 0; i<2; i++) {
       if(sensors_bme680_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
@@ -255,6 +280,7 @@ String update_websocket() {
       }
    }
 
+   // BME280
    for(int i = 0; i<2; i++) {
       if(sensors_bme280_enable[i]) {
         data = data + sensors_bme680_temp[i] + ";";
@@ -264,10 +290,15 @@ String update_websocket() {
       }
    }
 
-   for(int i = 0; i<3; i++) {
+   // BH1750
+   for(int i = 0; i<2; i++) {
      if(sensors_bh1750_enable[i]) {
        data = data + sensors_bh1750_lux[i] + ";";
      }
+   }
+   // MAX30102
+   if(sensors_max30102_enable) {
+       data = data + sensors_max30102_bpm + ";";
    }
 
    data.remove(data.length() -1 , data.length());
@@ -425,14 +456,14 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
   }
 
   // When an error happen
-  if(type == WS_EVT_ERROR){
+  if(type == WS_EVT_ERROR) {
       Serial.println(LANG_WEBSOCKET_ERROR);
   }
 
   // When a message is received
-  if(type == WS_EVT_DATA){
+  if(type == WS_EVT_DATA) {
     AwsFrameInfo * info = (AwsFrameInfo*)arg;
-    if(info->final && info->index == 0 && info->len == len){
+    if(info->final && info->index == 0 && info->len == len) {
         //We only manage TEXT data
         if(info->opcode == WS_TEXT) {
 
@@ -455,7 +486,6 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
               }
               //If msg:"wifi_scan" scan wifi
               else if(message.equals("wifi_scan")) {
-                Serial.println("Wifi Scan");
                 wifi_scan(client);
               }
               //If msg:"open_settings" get settings
@@ -491,13 +521,17 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
                 web_get_flash(client);
               } 
               // If msg:"set_clock" set clock
-              else if(message.equals("set_clock")){
-                rtc.adjust(DateTime(doc["year"], doc["month"], doc["day"], doc["hour"], doc["minute"], doc["second"]));
-                web_set_clock(client);
+              else if(message.equals("set_clock")) {
+                if(sensors_ds3231_enable) {
+                  rtc.adjust(DateTime(doc["year"], doc["month"], doc["day"], doc["hour"], doc["minute"], doc["second"]));
+                  web_set_clock(client);
+                }
               }
               // If msg:"get_clock" get local clock
-              else if(message.equals("get_clock")){
-                web_get_clock(client);
+              else if(message.equals("get_clock")) {
+                if(sensors_ds3231_enable) {
+                  web_get_clock(client);
+                }
               }
               else {
                 Serial.println(LANG_WEBSOCKET_INVALID_COMMAND);

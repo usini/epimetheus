@@ -29,3 +29,7 @@ const String GAS_TYPE = "gas";
 const String LUX_UNIT = "lux";
 const String LUX_COLOR = "#effa7a";
 const String LUX_TYPE = "lux";
+
+const String BPM_UNIT = "bpm";
+const String BPM_COLOR = "#841607";
+const String BPM_TYPE = "bpm";

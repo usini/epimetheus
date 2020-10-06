@@ -1,7 +1,7 @@
 /*
-  BME680 - Temperature, Humidity, Pressure and Gas Sensor
-  Informations : https://www.adafruit.com/product/3660
-  Library  : Adafruit BME680 
+  BH1750 Light Sensor 
+  Informations : https://www.adafruit.com/product/4681
+  Library  : SparkFun_MAX3010x_Sensor_Library
 */
 
 #include <hp_BH1750.h> 

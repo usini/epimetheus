@@ -8,6 +8,7 @@
 #include "sensors/i2c_tsl2561.h"   // TSL2561 processing
 #include "sensors/i2c_bme280.h"
 #include "sensors/i2c_bh1750.h"
+#include "sensors/i2c_max30102.h"
 
 int nb_sensors = 0;
 bool sensor_changed = false;
@@ -17,6 +18,21 @@ bool clock_active = false;
 void refresh_sensors(bool enable, byte address) {
 
   switch (address) {
+
+    case MAX30102_0_ADDR:
+      if(enable) {
+        if(!sensors_max30102_enable) {
+          sensors_max30102_enable = true;
+          setup_max30102();
+          nb_sensors++;
+        } 
+      } else {
+        if(sensors_max30102_enable) {
+          sensors_max30102_enable = false;
+        }
+      }
+    break;
+
     case BH1750_0_ADDR:
       if(enable) {
         if(!sensors_bh1750_enable[0]) {
@@ -181,6 +197,7 @@ void update_sensors() {
       update_bme680();
       update_bme280();
       update_bh1750();
+      update_max30102();
       update_clock();
 }
 

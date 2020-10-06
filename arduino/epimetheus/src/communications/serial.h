@@ -12,8 +12,9 @@ void update_serial() {
         Serial.println("[SPIFFS] " + LANG_SAVING);
     }
 
-    if(sensors_ds3231_enable){
-        // DS3231
+    // DS3231
+    if(sensors_ds3231_enable) {
+       
         Serial.print("[" + LANG_DS3231 +  "] " + LANG_DATE + ":");
         Serial.print(now.year(), DEC); 
         Serial.print('/');
@@ -108,6 +109,15 @@ void update_serial() {
             Serial.println(" " + LUX_UNIT);
         }
     }
+
+    // MAX30102
+    if(sensors_max30102_enable) {
+            Serial.printf("[MAX30102] ");
+            Serial.print(LANG_BPM + " : ");
+            Serial.print(sensors_max30102_bpm);
+            Serial.println(" " + BPM_UNIT);
+    }
+
     Serial.println("___________________________");
 }
 
@@ -180,6 +190,13 @@ void scan_serial() {
         }
     }
 
+    // MAX30102
+    if(sensors_max30102_enable) {
+        Serial.print("[0x");
+        Serial.print(MAX30102_0_ADDR, HEX);
+        Serial.println("] " + LANG_MAX30102_FULLNAME + " - " + MAX30102_LINK);
+    }
+    
     // DS3231
     if(sensors_ds3231_enable) {
         Serial.print("[0x");

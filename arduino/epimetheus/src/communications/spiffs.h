@@ -7,7 +7,7 @@ void scan_local_storage() {
     file.print(LANG_DATE + DATA_SEPARATOR);
     // TSL2561
     for(int i = 0; i<3; i++) {
-        if(sensors_tsl2561_enable[i]){
+        if(sensors_tsl2561_enable[i]) {
             file.print(LANG_LIGHT + DATA_SEPARATOR);
         }
     }
@@ -33,10 +33,16 @@ void scan_local_storage() {
 
     // BH1750
     for(int i = 0; i<2; i++) {
-        if(sensors_bh1750_enable[i]){
+        if(sensors_bh1750_enable[i]) {
             file.print(LANG_LIGHT + DATA_SEPARATOR);
         }
     }
+
+    // MAX30102
+    if(sensors_max30102_enable) {
+        file.print(LANG_BPM + DATA_SEPARATOR);
+    }
+
     file.println();
     file.close();
 }
@@ -45,7 +51,7 @@ void scan_local_storage() {
 void update_local_storage() {
     File file = SPIFFS.open("/data.csv", FILE_APPEND);
 
-    //DS3231
+    // DS3231
     file.print(now.year(), DEC); 
     file.print('/');
     if(now.month() < 10) {
@@ -74,14 +80,14 @@ void update_local_storage() {
     file.print(now.second(), DEC);
     file.print(DATA_SEPARATOR);
 
-    //TSL2561
+    // TSL2561
     for(int i = 0; i<3; i++) {
         if(sensors_tsl2561_enable[i]) {
             file.print(sensors_tsl2561_lux[i] + DATA_SEPARATOR);
         }
     }
 
-    //BME680
+    // BME680
     for(int i = 0; i<2; i++) {
         if(sensors_bme680_enable[i]) {
             file.print(sensors_bme680_temp[i] + DATA_SEPARATOR);
@@ -91,7 +97,7 @@ void update_local_storage() {
         }
     }
 
-    //BME280
+    // BME280
     for(int i = 0; i<2; i++) {
         if(sensors_bme280_enable[i]) {
             file.print(sensors_bme280_temp[i] + DATA_SEPARATOR);
@@ -100,11 +106,16 @@ void update_local_storage() {
         }
     }
 
-    //BH1750
+    // BH1750
     for(int i = 0; i<3; i++) {
         if(sensors_bh1750_enable[i]) {
             file.print(sensors_bh1750_lux[i] + DATA_SEPARATOR);
         }
+    }
+
+    // MAX30102
+    if(sensors_max30102_enable) {
+        file.print(sensors_max30102_bpm + DATA_SEPARATOR);
     }
 
     file.println();

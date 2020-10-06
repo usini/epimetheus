@@ -40,3 +40,11 @@ const String BH1750_LINK = "https://www.adafruit.com/product/4681";
 
 bool sensors_bh1750_enable[2] = {false, false};
 volatile float sensors_bh1750_lux[2];
+
+/* MAX30102 - Heart-Rate Sensor - https://github.com/sparkfun/SparkFun_MAX3010x_Sensor_Library */
+const byte MAX30102_0_ADDR = 0x57;
+const String MAX30102_LINK = "https://github.com/sparkfun/SparkFun_MAX3010x_Sensor_Library";
+
+bool sensors_max30102_enable = false;
+volatile int sensors_max30102_bpm = 0;
+

@@ -14,7 +14,6 @@ bool save_flash = false;
 int spiffs_space = 0;
 
 // Get SPIFFS memory available and save it as a percent
-// TODO : Percent of space available is always 0
 void get_spiffs_space() {
     long spiffs_used = (long)SPIFFS.usedBytes();
     long spiffs_total = (long)SPIFFS.totalBytes();

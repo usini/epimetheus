@@ -34,12 +34,12 @@ void setup() {
 
 void loop() {
   // Webserver / Websocket is async not need to update in loop
+  update_sensors(); //Get new values from sensors  
   
   //Each timerDelay_update update sensors
   if ((millis() - lastTime_update) > timerDelay_update) {
     debug_serial_start();
     scan_serial();
-    update_sensors(); //Get new values from sensors
     update_serial();  //Display values on Serial
     
     if(save_flash) { // If save_flash is active
@@ -56,6 +56,7 @@ void loop() {
   //Each timerDelay_scan check i²c
   if ((millis() - lastTime_scan) > timerDelay_scan) {
     scan_sensors();
+
     lastTime_scan = millis();
   }
 }

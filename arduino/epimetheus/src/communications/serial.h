@@ -118,6 +118,46 @@ void update_serial() {
             Serial.println(" " + BPM_UNIT);
     }
 
+    // MPU6050
+    for(int i = 0; i<2; i++) {
+        if(sensors_mpu6050_enable[i]) {
+            Serial.printf("[MPU6050_%d] ", i);
+            Serial.print(LANG_TEMPERATURE + ": ");
+            Serial.print(sensors_mpu6050_temp[i]);
+            Serial.println(" " + TEMP_UNIT);
+
+            Serial.printf("[MPU6050_%d] ", i);
+            Serial.print(LANG_ACC + " X : ");
+            Serial.print(sensors_mpu6050_acc_x[i]);
+            Serial.println(" " + ACC_UNIT);
+
+            Serial.printf("[MPU6050_%d] ", i);
+            Serial.print(LANG_ACC + " Y : ");
+            Serial.print(sensors_mpu6050_acc_y[i]);
+            Serial.println(" " + ACC_UNIT);
+
+            Serial.printf("[MPU6050_%d] ",i);
+            Serial.print(LANG_ACC + " Z : ");
+            Serial.print(sensors_mpu6050_acc_z[i]);
+            Serial.println(" " + ACC_UNIT);
+
+            Serial.printf("[MPU6050_%d] ", i);
+            Serial.print(LANG_GYRO + " X : ");
+            Serial.print(sensors_mpu6050_gyro_x[i]);
+            Serial.println(" " + GYRO_UNIT);
+
+            Serial.printf("[MPU6050_%d] ", i);
+            Serial.print(LANG_GYRO + " Y : ");
+            Serial.print(sensors_mpu6050_gyro_y[i]);
+            Serial.println(" " + GYRO_UNIT);
+
+            Serial.printf("[MPU6050_%d] ",i);
+            Serial.print(LANG_GYRO + " Z: ");
+            Serial.print(sensors_mpu6050_gyro_z[i]);
+            Serial.println(" " + GYRO_UNIT);
+        }
+    }
+
     Serial.println("___________________________");
 }
 
@@ -203,5 +243,22 @@ void scan_serial() {
         Serial.print(DS3231_ADDR, HEX);
         Serial.println("] " + LANG_DS3231_FULLNAME + " - " + DS3231_LINK);
     }
+
+    // MPU6050
+    for(int i = 0; i<2; i++) {
+        if(sensors_mpu6050_enable[i]) {
+            Serial.print("[0x");
+            switch(i) {
+                case 0:
+                    Serial.print(MPU6050_0_ADDR, HEX);
+                break;
+                case 1:
+                    Serial.print(MPU6050_1_ADDR, HEX);
+                break;
+            }
+            Serial.println("] " + LANG_MPU6050_FULLNAME + " - " + MPU6050_LINK);
+        }
+    }
+
 }
 

@@ -19,7 +19,6 @@ void setup() {
   /* Sensors */
   setup_sensors(); // get ready to use sensors
   scan_sensors();  // scan and add/remove sensors
-  setup_clock();   // Setup Clock (Clock is considerated as a sensor)
   scan_serial();   // Display scan on Serial
 
   /* Communication */

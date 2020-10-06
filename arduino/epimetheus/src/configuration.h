@@ -33,3 +33,15 @@ const String LUX_TYPE = "lux";
 const String BPM_UNIT = "bpm";
 const String BPM_COLOR = "#841607";
 const String BPM_TYPE = "bpm";
+
+const String ACC_UNIT = "m/s^2";
+const String ACC_TYPE = "acc";
+const String ACC_X_COLOR = "#669966";
+const String ACC_Y_COLOR = "#cccc33";
+const String ACC_Z_COLOR = "#6600cc";
+
+const String GYRO_UNIT = "rad/s";
+const String GYRO_TYPE = "gyro";
+const String GYRO_X_COLOR = "#172012";
+const String GYRO_Y_COLOR = "#3d3d0f";
+const String GYRO_Z_COLOR = "#140028";

@@ -9,6 +9,7 @@
 #include "sensors/i2c_bme280.h"
 #include "sensors/i2c_bh1750.h"
 #include "sensors/i2c_max30102.h"
+#include "sensors/i2c_mpu6050.h"
 
 int nb_sensors = 0;
 bool sensor_changed = false;
@@ -104,20 +105,43 @@ void refresh_sensors(bool enable, byte address) {
       }
     break;
 
-    case DS3231_ADDR:
+    case MPU6050_0_ADDR: // Adress conflict with MPU6050 ADDR 0
       if(enable) {
-        if(!sensors_ds3231_enable) {
-          sensors_ds3231_enable = true;
-          clock_active = true;
+        if(!sensors_mpu6050_enable[0]) {
+          if(setup_mpu6050(0)) {
+            sensors_mpu6050_enable[0] = true;
+            clock_active = true;
+          } else {
+            if(!sensors_ds3231_enable) {
+              setup_ds3231();
+              sensors_ds3231_enable = true;
+            }
+          }          
         }
       } else {
         if(sensors_ds3231_enable) {
           sensors_ds3231_enable = false;
+          clock_active = false;
+        }
+        if(sensors_mpu6050_enable[0]) {
+          sensors_mpu6050_enable[0] = false;
         }
       }
     break;
 
-    case BME680_0_ADDR:
+    case MPU6050_1_ADDR:
+      if(enable) {
+        if(sensors_mpu6050_enable[1]) {
+          setup_mpu6050(1);
+          sensors_mpu6050_enable[1] = true;
+        }
+      } else {
+        if(sensors_mpu6050_enable[1]) {
+          sensors_mpu6050_enable[1] = false;
+        }
+      }
+
+    case BME680_0_ADDR: // Address Conflict with BME280
       if(enable) {
         if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0])) {   
           if(setup_bme680(0)) {
@@ -198,7 +222,8 @@ void update_sensors() {
       update_bme280();
       update_bh1750();
       update_max30102();
-      update_clock();
+      update_mpu6050();
+      update_ds3231();
 }
 
 // Basic I²C setup / sensors update on CORE 0

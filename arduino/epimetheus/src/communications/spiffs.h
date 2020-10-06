@@ -43,6 +43,19 @@ void scan_local_storage() {
         file.print(LANG_BPM + DATA_SEPARATOR);
     }
 
+    // MPU6050
+    for(int i = 0; i<2; i++) {
+        if(sensors_mpu6050_enable[i]) {
+            file.print(LANG_TEMPERATURE + DATA_SEPARATOR);
+            file.print(LANG_ACC + " X" + DATA_SEPARATOR);
+            file.print(LANG_ACC + " Y" + DATA_SEPARATOR);
+            file.print(LANG_ACC + " Z" + DATA_SEPARATOR);
+            file.print(LANG_GYRO + " X" + DATA_SEPARATOR);
+            file.print(LANG_GYRO + " Y" + DATA_SEPARATOR);
+            file.print(LANG_GYRO + " Z" + DATA_SEPARATOR);
+        }
+    }
+
     file.println();
     file.close();
 }
@@ -116,6 +129,19 @@ void update_local_storage() {
     // MAX30102
     if(sensors_max30102_enable) {
         file.print(sensors_max30102_bpm + DATA_SEPARATOR);
+    }
+
+    // MPU6050
+    for(int i = 0; i<2; i++) {
+        if(sensors_mpu6050_enable[i]) {
+            file.print(sensors_mpu6050_temp[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_acc_x[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_acc_y[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_acc_z[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_gyro_x[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_gyro_y[i] + DATA_SEPARATOR);
+            file.print(sensors_mpu6050_gyro_z[i] + DATA_SEPARATOR);
+        }
     }
 
     file.println();

@@ -240,7 +240,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
       }
     }
 
-    //MAX30102
+    // MAX30102
     if(sensors_max30102_enable) {
         StaticJsonDocument<512> max30102;
         max30102["msg"] = "list";
@@ -255,7 +255,104 @@ void scan_websocket(AsyncWebSocketClient * client) {
         id++;
         serializeJson(max30102, buffer_websocket);
         client->text(buffer_websocket);
-    } 
+    }
+
+    // MPU6050
+    for(int i = 0; i<2; i++) {
+       if(sensors_mpu6050_enable[i]) {
+        sensor_name = "MPU6050_" + String(i);
+        StaticJsonDocument<512> mpu6050_temp;  
+        mpu6050_temp["msg"] = "list";
+        mpu6050_temp["result"] = true;
+        mpu6050_temp["id"] = id;
+        mpu6050_temp["sensor"] = sensor_name;
+        mpu6050_temp["text"] = LANG_TEMPERATURE;
+        mpu6050_temp["unit"] = TEMP_UNIT;
+        mpu6050_temp["color"] = TEMP_COLOR;
+        mpu6050_temp["type"] = TEMP_TYPE;
+        serializeJson(mpu6050_temp, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_acc_x;  
+        mpu6050_acc_x["msg"] = "list";
+        mpu6050_acc_x["result"] = true;
+        mpu6050_acc_x["id"] = id;
+        mpu6050_acc_x["sensor"] = sensor_name;
+        mpu6050_acc_x["text"] = LANG_ACC + " X";
+        mpu6050_acc_x["unit"] = ACC_UNIT;
+        mpu6050_acc_x["color"] = ACC_X_COLOR;
+        mpu6050_acc_x["type"] = ACC_TYPE;
+        serializeJson(mpu6050_acc_x, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_acc_y;  
+        mpu6050_acc_y["msg"] = "list";
+        mpu6050_acc_y["result"] = true;
+        mpu6050_acc_y["id"] = id;
+        mpu6050_acc_y["sensor"] = sensor_name;
+        mpu6050_acc_y["text"] = LANG_ACC + " Y";
+        mpu6050_acc_y["unit"] = ACC_UNIT;
+        mpu6050_acc_y["color"] = ACC_Y_COLOR;
+        mpu6050_acc_y["type"] = ACC_TYPE;
+        serializeJson(mpu6050_acc_y, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_acc_z;  
+        mpu6050_acc_z["msg"] = "list";
+        mpu6050_acc_z["result"] = true;
+        mpu6050_acc_z["id"] = id;
+        mpu6050_acc_z["sensor"] = sensor_name;
+        mpu6050_acc_z["text"] = LANG_ACC + " Z";
+        mpu6050_acc_z["unit"] = ACC_UNIT;
+        mpu6050_acc_z["color"] = ACC_Z_COLOR;
+        mpu6050_acc_z["type"] = ACC_TYPE;
+        serializeJson(mpu6050_acc_z, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_gyro_x;  
+        mpu6050_gyro_x["msg"] = "list";
+        mpu6050_gyro_x["result"] = true;
+        mpu6050_gyro_x["id"] = id;
+        mpu6050_gyro_x["sensor"] = sensor_name;
+        mpu6050_gyro_x["text"] = LANG_GYRO + " X";
+        mpu6050_gyro_x["unit"] = GYRO_UNIT;
+        mpu6050_gyro_x["color"] = GYRO_X_COLOR;
+        mpu6050_gyro_x["type"] = GYRO_TYPE;
+        serializeJson(mpu6050_gyro_x, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_gyro_y;  
+        mpu6050_gyro_y["msg"] = "list";
+        mpu6050_gyro_y["result"] = true;
+        mpu6050_gyro_y["id"] = id;
+        mpu6050_gyro_y["sensor"] = sensor_name;
+        mpu6050_gyro_y["text"] = LANG_GYRO + " Y";
+        mpu6050_gyro_y["unit"] = GYRO_UNIT;
+        mpu6050_gyro_y["color"] = GYRO_Y_COLOR;
+        mpu6050_gyro_y["type"] = GYRO_TYPE;
+        serializeJson(mpu6050_gyro_y, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+
+        StaticJsonDocument<512> mpu6050_gyro_z;  
+        mpu6050_gyro_z["msg"] = "list";
+        mpu6050_gyro_z["result"] = true;
+        mpu6050_gyro_z["id"] = id;
+        mpu6050_gyro_z["sensor"] = sensor_name;
+        mpu6050_gyro_z["text"] = LANG_GYRO + " Z";
+        mpu6050_gyro_z["unit"] = GYRO_UNIT;
+        mpu6050_gyro_z["color"] = GYRO_Z_COLOR;
+        mpu6050_gyro_z["type"] = GYRO_TYPE;
+        serializeJson(mpu6050_gyro_z, buffer_websocket);
+        client->text(buffer_websocket);
+        id++;
+       }
+    }
 }
 
 // Send Data from sensors (not JSON to improve performance)
@@ -296,9 +393,23 @@ String update_websocket() {
        data = data + sensors_bh1750_lux[i] + ";";
      }
    }
+   
    // MAX30102
    if(sensors_max30102_enable) {
        data = data + sensors_max30102_bpm + ";";
+   }
+
+   // MPU6050
+   for(int i = 0; i<2; i++) {
+      if(sensors_mpu6050_enable[i]) {
+        data = data + sensors_mpu6050_temp[i] + ";";
+        data = data + sensors_mpu6050_acc_x[i] + ";";
+        data = data + sensors_mpu6050_acc_y[i] + ";";
+        data = data + sensors_mpu6050_acc_z[i] + ";";
+        data = data + sensors_mpu6050_gyro_x[i] + ";";
+        data = data + sensors_mpu6050_gyro_y[i] + ";";
+        data = data + sensors_mpu6050_gyro_z[i] + ";";
+      }
    }
 
    data.remove(data.length() -1 , data.length());

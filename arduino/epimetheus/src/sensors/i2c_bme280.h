@@ -1,3 +1,8 @@
+/*
+  BME280 - Temperature, Humidity, Pressure Sensor
+  Informations : https://www.adafruit.com/product/2652
+  Library  : Adafruit BME280 
+*/
 
 #include <Adafruit_BME280.h>
 

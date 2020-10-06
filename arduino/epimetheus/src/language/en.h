@@ -7,6 +7,9 @@ const String LANG_PRESSURE = "Atmospheric Pressure";
 const String LANG_GAS = "Gas";
 const String LANG_LIGHT = "Luminosity";
 const String LANG_BPM = "Beat per minute";
+const String LANG_ACC = "Acceleration";
+const String LANG_GYRO = "Gyroscope";
+
 const String LANG_SENSOR_CHANGED = "[SENSOR] Sensors has changed...";
 
 const String LANG_BME280_FULLNAME = "BME280 - Temperature, Humidity, Pressure Sensor";
@@ -15,6 +18,7 @@ const String LANG_TSL2561_FULLNAME = "TSL2561 - Digital Luminosity/Lux/Light Sen
 const String LANG_DS3231_FULLNAME = "DS3231 - Precision RTC Breakout";
 const String LANG_BH1750_FULLNAME = "BH1750 - Light Sensor";
 const String LANG_MAX30102_FULLNAME = "MAX30102 - Heartbeat Sensor";
+const String LANG_MPU6050_FULLNAME = "MPU6050 - 6-DoF Acceleration and Gyroscope Sensor";
 
 const String LANG_DS3231 = "DS3231";
 const String LANG_DS3231_ERROR = "[CLOCK] Error, can't init internal clock";

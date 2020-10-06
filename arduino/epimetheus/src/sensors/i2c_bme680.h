@@ -11,7 +11,7 @@ Adafruit_BME680 sensors_bme680[2];
 
 bool setup_bme680(int id) {
   byte address = 0x00;
-  if(id == 0){
+  if(id == 0) {
     address = BME680_0_ADDR;
   } else {
     address = BME680_1_ADDR;
@@ -20,7 +20,7 @@ bool setup_bme680(int id) {
   bool check = false;
   check = sensors_bme680[id].begin(address);
  
-  if(check){
+  if(check) {
     sensors_bme680[id].setTemperatureOversampling(BME680_OS_16X);
     sensors_bme680[id].setHumidityOversampling(BME680_OS_16X);
     sensors_bme680[id].setPressureOversampling(BME680_OS_4X);

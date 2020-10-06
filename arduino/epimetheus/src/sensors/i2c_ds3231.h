@@ -9,17 +9,11 @@
 RTC_DS3231 rtc;
 DateTime now;
 
-void setup_clock() {
-    if(sensors_ds3231_enable) {
-        if(! rtc.begin()) {
-            Serial.println(LANG_DS3231_ERROR);
-        } else {
-            Serial.println(LANG_DS3231_OK);
-        }
-    }
+void setup_ds3231() {
+    rtc.begin();
 }
 
-void update_clock() {
+void update_ds3231() {
     if(sensors_ds3231_enable) {
         now = rtc.now();
     }

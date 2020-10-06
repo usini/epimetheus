@@ -48,3 +48,18 @@ const String MAX30102_LINK = "https://github.com/sparkfun/SparkFun_MAX3010x_Sens
 bool sensors_max30102_enable = false;
 volatile int sensors_max30102_bpm = 0;
 
+/* MPU6050 - 6-DoF Accelerometer and Gyro - https://www.adafruit.com/product/3886 */
+const byte MPU6050_0_ADDR = 0x68;
+const byte MPU6050_1_ADDR = 0x69;
+const String MPU6050_LINK = "https://www.adafruit.com/product/3886";
+
+bool sensors_mpu6050_enable[2] = {false, false};
+volatile int sensors_mpu6050_temp[2];
+volatile int sensors_mpu6050_acc_x[2];
+volatile int sensors_mpu6050_acc_y[2];
+volatile int sensors_mpu6050_acc_z[2];
+volatile int sensors_mpu6050_gyro_x[2];
+volatile int sensors_mpu6050_gyro_y[2];
+volatile int sensors_mpu6050_gyro_z[2];
+ 
+

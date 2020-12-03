@@ -6,7 +6,7 @@
 #include "sensors/i2c_ds3231.h"
 #include "sensors/i2c_bmp280.h"
 #include "sensors/i2c_bme280.h"
-#include "sensors/i2c_bme680.h"    
+#include "sensors/i2c_bme680.h"
 #include "sensors/i2c_tsl2561.h"
 #include "sensors/i2c_bh1750.h"
 #include "sensors/i2c_max30102.h"
@@ -27,7 +27,7 @@ void refresh_sensors(bool enable, byte address) {
           sensors_max30102_enable = true;
           setup_max30102();
           nb_sensors++;
-        } 
+        }
       } else {
         if(sensors_max30102_enable) {
           sensors_max30102_enable = false;
@@ -41,7 +41,7 @@ void refresh_sensors(bool enable, byte address) {
           sensors_bh1750_enable[0] = true;
           setup_bh1750(0);
           nb_sensors++;
-        } 
+        }
       } else {
         if(sensors_bh1750_enable[0]) {
           sensors_bh1750_enable[0] = false;
@@ -55,22 +55,22 @@ void refresh_sensors(bool enable, byte address) {
           sensors_bh1750_enable[1] = true;
           setup_bh1750(1);
           nb_sensors++;
-        } 
+        }
       } else {
         if(sensors_bh1750_enable[1]) {
           sensors_bh1750_enable[1] = false;
         }
       }
     break;
-    
-    
+
+
     case TSL2561_0_ADDR:
       if(enable) {
         if(!sensors_tsl2561_enable[0]) {
           sensors_tsl2561_enable[0] = true;
           setup_tsl2561(0);
           nb_sensors++;
-        } 
+        }
       } else {
         if(sensors_tsl2561_enable[0]) {
           sensors_tsl2561_enable[0] = false;
@@ -84,7 +84,7 @@ void refresh_sensors(bool enable, byte address) {
           sensors_tsl2561_enable[1] = true;
           setup_tsl2561(1);
           nb_sensors++;
-        } 
+        }
       } else {
         if(sensors_tsl2561_enable[1]) {
           sensors_tsl2561_enable[1] = false;
@@ -98,7 +98,7 @@ void refresh_sensors(bool enable, byte address) {
           sensors_tsl2561_enable[2] = true;
           setup_tsl2561(0);
           nb_sensors++;
-        }  
+        }
       } else {
         if(sensors_tsl2561_enable[2]) {
           sensors_tsl2561_enable[2] = false;
@@ -117,7 +117,7 @@ void refresh_sensors(bool enable, byte address) {
               setup_ds3231();
               sensors_ds3231_enable = true;
             }
-          }          
+          }
         }
       } else {
         if(sensors_ds3231_enable) {
@@ -144,7 +144,7 @@ void refresh_sensors(bool enable, byte address) {
 
     case BME680_0_ADDR: // Address Conflict with BME280
       if(enable) {
-        if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0]) && (!sensors_bmp280_enable[0])) {   
+        if((!sensors_bme680_enable[0]) && (!sensors_bme280_enable[0]) && (!sensors_bmp280_enable[0])) {
           if(setup_bme680(0)) {
             sensors_bme680_enable[0] = true;
             nb_sensors++;
@@ -176,7 +176,7 @@ void refresh_sensors(bool enable, byte address) {
 
     case BME680_1_ADDR:
       if(enable) {
-        if((!sensors_bme680_enable[1]) && (!sensors_bme280_enable[1]) && (!sensors_bmp280_enable[1])) {   
+        if((!sensors_bme680_enable[1]) && (!sensors_bme280_enable[1]) && (!sensors_bmp280_enable[1])) {
           if(setup_bme680(1)) {
             sensors_bme680_enable[1] = true;
             nb_sensors++;
@@ -205,7 +205,7 @@ void refresh_sensors(bool enable, byte address) {
         }
       }
     break;
-    
+
     default:
       if(enable) {
         Serial.print("[0x");

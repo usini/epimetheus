@@ -1,5 +1,5 @@
 
-// TODO 
+// TODO
 void scan_local_storage() {
     File file = SPIFFS.open("/data.csv", FILE_APPEND);
     file.println();
@@ -64,7 +64,7 @@ void update_local_storage() {
     File file = SPIFFS.open("/data.csv", FILE_APPEND);
 
     // DS3231
-    file.print(now.year(), DEC); 
+    file.print(now.year(), DEC);
     file.print('/');
     if(now.month() < 10) {
         file.print("0");

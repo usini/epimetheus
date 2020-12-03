@@ -9,7 +9,7 @@
 const int SERVER_PORT = 80;
 
 AsyncWebServer server(SERVER_PORT); // Create Async WebServer on Server Port
-AsyncWebSocket ws("/websocket"); //Create Async WebSocket 
+AsyncWebSocket ws("/websocket"); //Create Async WebSocket
 void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventType type, void * arg, uint8_t *data, size_t len);
 
 // Serve file from SPIFFS on Webserver
@@ -22,7 +22,7 @@ void setup_web() {
         server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request){
           request->send(SPIFFS, "/settings.html", "text/html");
         });
-        
+
         server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
           request->send(SPIFFS, "/style.css","text/css");
         });
@@ -30,7 +30,7 @@ void setup_web() {
         server.on("/charts.css", HTTP_GET, [](AsyncWebServerRequest *request){
           request->send(SPIFFS, "/charts.css","text/css");
         });
-        
+
         server.on("/slider.css", HTTP_GET, [](AsyncWebServerRequest *request){
           request->send(SPIFFS, "/slider.css","text/css");
         });
@@ -117,12 +117,12 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
       }
     }
-  
+
     // BMP280
     for(int i = 0; i<2; i++) {
        if(sensors_bmp280_enable[i]) {
         sensor_name = "BMP280_" + String(i);
-        StaticJsonDocument<512> bmp280_temp;  
+        StaticJsonDocument<512> bmp280_temp;
         bmp280_temp["msg"] = "list";
         bmp280_temp["result"] = true;
         bmp280_temp["id"] = id;
@@ -135,7 +135,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bmp280_pressure;  
+        StaticJsonDocument<512> bmp280_pressure;
         bmp280_pressure["msg"] = "list";
         bmp280_pressure["result"] = true;
         bmp280_pressure["id"] = id;
@@ -154,7 +154,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
     for(int i = 0; i<2; i++) {
        if(sensors_bme280_enable[i]) {
         sensor_name = "BME280_" + String(i);
-        StaticJsonDocument<512> bme280_temp;  
+        StaticJsonDocument<512> bme280_temp;
         bme280_temp["msg"] = "list";
         bme280_temp["result"] = true;
         bme280_temp["id"] = id;
@@ -167,7 +167,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bme280_humidity;  
+        StaticJsonDocument<512> bme280_humidity;
         bme280_humidity["msg"] = "list";
         bme280_humidity["result"] = true;
         bme280_humidity["id"] = id;
@@ -180,7 +180,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bme280_pressure;  
+        StaticJsonDocument<512> bme280_pressure;
         bme280_pressure["msg"] = "list";
         bme280_pressure["result"] = true;
         bme280_pressure["id"] = id;
@@ -199,7 +199,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
     for(int i = 0; i<2; i++) {
        if(sensors_bme680_enable[i]) {
         sensor_name = "BME680_" + String(i);
-        StaticJsonDocument<512> bme680_temp;  
+        StaticJsonDocument<512> bme680_temp;
         bme680_temp["msg"] = "list";
         bme680_temp["result"] = true;
         bme680_temp["id"] = id;
@@ -212,7 +212,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bme680_humidity;  
+        StaticJsonDocument<512> bme680_humidity;
         bme680_humidity["msg"] = "list";
         bme680_humidity["result"] = true;
         bme680_humidity["id"] = id;
@@ -225,7 +225,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bme680_pressure;  
+        StaticJsonDocument<512> bme680_pressure;
         bme680_pressure["msg"] = "list";
         bme680_pressure["result"] = true;
         bme680_pressure["id"] = id;
@@ -238,7 +238,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> bme680_gas;  
+        StaticJsonDocument<512> bme680_gas;
         bme680_gas["msg"] = "list";
         bme680_gas["result"] = true;
         bme680_gas["id"] = id;
@@ -293,7 +293,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
     for(int i = 0; i<2; i++) {
        if(sensors_mpu6050_enable[i]) {
         sensor_name = "MPU6050_" + String(i);
-        StaticJsonDocument<512> mpu6050_temp;  
+        StaticJsonDocument<512> mpu6050_temp;
         mpu6050_temp["msg"] = "list";
         mpu6050_temp["result"] = true;
         mpu6050_temp["id"] = id;
@@ -306,7 +306,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_acc_x;  
+        StaticJsonDocument<512> mpu6050_acc_x;
         mpu6050_acc_x["msg"] = "list";
         mpu6050_acc_x["result"] = true;
         mpu6050_acc_x["id"] = id;
@@ -319,7 +319,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_acc_y;  
+        StaticJsonDocument<512> mpu6050_acc_y;
         mpu6050_acc_y["msg"] = "list";
         mpu6050_acc_y["result"] = true;
         mpu6050_acc_y["id"] = id;
@@ -332,7 +332,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_acc_z;  
+        StaticJsonDocument<512> mpu6050_acc_z;
         mpu6050_acc_z["msg"] = "list";
         mpu6050_acc_z["result"] = true;
         mpu6050_acc_z["id"] = id;
@@ -345,7 +345,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_gyro_x;  
+        StaticJsonDocument<512> mpu6050_gyro_x;
         mpu6050_gyro_x["msg"] = "list";
         mpu6050_gyro_x["result"] = true;
         mpu6050_gyro_x["id"] = id;
@@ -358,7 +358,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_gyro_y;  
+        StaticJsonDocument<512> mpu6050_gyro_y;
         mpu6050_gyro_y["msg"] = "list";
         mpu6050_gyro_y["result"] = true;
         mpu6050_gyro_y["id"] = id;
@@ -371,7 +371,7 @@ void scan_websocket(AsyncWebSocketClient * client) {
         client->text(buffer_websocket);
         id++;
 
-        StaticJsonDocument<512> mpu6050_gyro_z;  
+        StaticJsonDocument<512> mpu6050_gyro_z;
         mpu6050_gyro_z["msg"] = "list";
         mpu6050_gyro_z["result"] = true;
         mpu6050_gyro_z["id"] = id;
@@ -433,7 +433,7 @@ String update_websocket() {
        data = data + sensors_bh1750_lux[i] + ";";
      }
    }
-   
+
    // MAX30102
    if(sensors_max30102_enable) {
        data = data + sensors_max30102_bpm + ";";
@@ -458,7 +458,7 @@ String update_websocket() {
 
 // Scan Available Network and send it to websocket
 void wifi_scan(AsyncWebSocketClient * client) {
-  StaticJsonDocument<512> doc; 
+  StaticJsonDocument<512> doc;
   char buffer_websocket[4096];
   Serial.println("~---" + LANG_WIFI_SCAN + "---~");
   doc["msg"] = "wifi_scan";
@@ -487,7 +487,7 @@ void wifi_scan(AsyncWebSocketClient * client) {
 
 // Open Settings saved on Global Variable
 void web_open_settings(AsyncWebSocketClient * client) {
-  StaticJsonDocument<512> doc; 
+  StaticJsonDocument<512> doc;
   char buffer_websocket[512];
   doc["msg"] = "open_settings";
   doc["result"] = true;
@@ -500,7 +500,7 @@ void web_open_settings(AsyncWebSocketClient * client) {
 // Save settings on SPIFFS (settings.json)
 void web_save_settings(AsyncWebSocketClient * client){
   File file = SPIFFS.open("/settings.json", FILE_WRITE);
-  StaticJsonDocument<512> doc; 
+  StaticJsonDocument<512> doc;
   doc["wifi1_name"] = wifi1_name;
   doc["wifi1_pass"] = wifi1_pass;
   doc["wifi2_name"] = wifi2_name;
@@ -590,12 +590,12 @@ void web_get_clock(AsyncWebSocketClient * client) {
   doc["result"] = true;
   doc["value"] = String(now.year()) + "/" + String(now.month()) + "/" + String(now.day()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second());
   serializeJson(doc, buffer_websocket);
-  client->text(buffer_websocket);  
+  client->text(buffer_websocket);
 }
 
 // Event from Websocket (Mostly used to receive order from websocket)
 void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventType type, void * arg, uint8_t *data, size_t len) {
-  
+
   // When a client is connected
   if(type == WS_EVT_CONNECT) {
     Serial.println(client->id() + " " + LANG_CONNECTED);
@@ -622,11 +622,11 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
         // Transform JSON text to JSON object
         StaticJsonDocument<200> doc;
         DeserializationError error = deserializeJson(doc, data);
-        
+
         if(!error) {
           String message = doc["msg"];
           Serial.println(LANG_RECEIVED_MESSAGE + message);
-              
+
               //If msg:"list" scan
               if(message.equals("list")) {
                   scan_websocket(client);
@@ -670,7 +670,7 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
               // If msg:"flash" get state of save
               else if(message.equals("flash")) {
                 web_get_flash(client);
-              } 
+              }
               // If msg:"set_clock" set clock
               else if(message.equals("set_clock")) {
                 if(sensors_ds3231_enable) {

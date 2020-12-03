@@ -24,7 +24,7 @@ void setup_tsl2561(int sensor_id) {
 void update_tsl2561() {
   for(int sensor = 0; sensor < 3; sensor++) {
     if(sensors_tsl2561_enable[sensor]) {
-      sensors_event_t event; // Prepare event variable  
+      sensors_event_t event; // Prepare event variable
       sensors_tsl2561[sensor].getEvent(&event); // Read sensor and sent value to event variable
       if (event.light) {
         sensors_tsl2561_lux[sensor] = event.light; // Get light value from event

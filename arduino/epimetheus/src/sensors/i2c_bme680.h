@@ -1,7 +1,7 @@
 /*
   BME680 - Temperature, Humidity, Pressure and Gas Sensor
   Informations : https://www.adafruit.com/product/3660
-  Library  : Adafruit BME680 
+  Library  : Adafruit BME680
 */
 
 #include "Adafruit_BME680.h"
@@ -19,7 +19,7 @@ bool setup_bme680(int id) {
 
   bool check = false;
   check = sensors_bme680[id].begin(address);
- 
+
   if(check) {
     sensors_bme680[id].setTemperatureOversampling(BME680_OS_16X);
     sensors_bme680[id].setHumidityOversampling(BME680_OS_16X);

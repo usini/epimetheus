@@ -1,4 +1,3 @@
-
 /*
   MAX30102 Heart-Rate Sensor - High-Sensitivity Pulse Oximeter
   Informations : https://github.com/sparkfun/SparkFun_MAX3010x_Sensor_Library

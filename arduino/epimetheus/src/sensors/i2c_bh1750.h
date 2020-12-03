@@ -1,10 +1,10 @@
 /*
-  BH1750 Light Sensor 
+  BH1750 Light Sensor
   Informations : https://www.adafruit.com/product/4681
   Library  : SparkFun_MAX3010x_Sensor_Library
 */
 
-#include <hp_BH1750.h> 
+#include <hp_BH1750.h>
 
 hp_BH1750 sensors_bh1750[2];
 

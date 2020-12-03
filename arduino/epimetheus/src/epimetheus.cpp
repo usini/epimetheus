@@ -33,25 +33,24 @@ void setup() {
 
 void loop() {
   // Webserver / Websocket is async not need to update in loop
-  update_sensors(); //Get new values from sensors  
-  
+  update_sensors(); //Get new values from sensors
   //Each timerDelay_update display data
   if ((millis() - lastTime_update) > timerDelay_update) {
     debug_serial_start();
     scan_serial();
     update_serial();  //Display values on Serial
-    
+
     if(save_flash) { // If save_flash is active
       if(sensor_changed) { // Recreate header if sensor change
-        scan_local_storage(); 
+        scan_local_storage();
         sensor_changed = false;
       }
       update_local_storage();
     }
     lastTime_update = millis();
     debug_serial_end("update");
-  } 
-  
+  }
+
   //Each timerDelay_scan check i²c
   if ((millis() - lastTime_scan) > timerDelay_scan) {
     scan_sensors();

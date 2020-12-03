@@ -6,7 +6,7 @@ bool wifi_enable = true;
 const int WIFI_TIMEOUT = 5000; //Time out for WiFi (in ms)
 
 void setup_wifi() {
-    Serial.println("~---- WIFI ----~"); 
+    Serial.println("~---- WIFI ----~");
     wifiMulti.addAP(wifi1_name.c_str(), wifi1_pass.c_str()); // Add WiFi1 (stored from settings)
     wifiMulti.addAP(wifi2_name.c_str(), wifi2_pass.c_str()); // Add WiFi2 (stored from settings)
 
@@ -18,10 +18,10 @@ void setup_wifi() {
     while(wifiMulti.run() != WL_CONNECTED) {
       if ((millis() - timer_wifi) > WIFI_TIMEOUT) {
         wifi_enable = false;
-        break;   
+        break;
       }
     }
-    
+
     // If WiFi connection was established
     if(wifi_enable){
         // Display Connection name and IP on Serial

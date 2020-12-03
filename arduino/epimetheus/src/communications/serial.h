@@ -5,7 +5,7 @@ void setup_serial(int baudrate) {
 }
 
 void update_serial() {
-    
+
     Serial.println("___________________________");
 
     if(save_flash) {
@@ -14,9 +14,9 @@ void update_serial() {
 
     // DS3231
     if(sensors_ds3231_enable) {
-       
+
         Serial.print("[" + LANG_DS3231 +  "] " + LANG_DATE + ":");
-        Serial.print(now.year(), DEC); 
+        Serial.print(now.year(), DEC);
         Serial.print('/');
         if(now.month() < 10) {
             Serial.print("0");
@@ -197,7 +197,6 @@ void scan_serial() {
         }
     }
 
-  
     // BMP280
     for(int i = 0; i<2; i++) {
         if(sensors_bmp280_enable[i]) {
@@ -212,7 +211,7 @@ void scan_serial() {
             }
             Serial.println("] " + LANG_BMP280_FULLNAME + " - " + BMP280_LINK);
         }
-    }  
+    }
 
     // BME280
     for(int i = 0; i<2; i++) {
@@ -268,7 +267,7 @@ void scan_serial() {
         Serial.print(MAX30102_0_ADDR, HEX);
         Serial.println("] " + LANG_MAX30102_FULLNAME + " - " + MAX30102_LINK);
     }
-    
+
     // DS3231
     if(sensors_ds3231_enable) {
         Serial.print("[0x");

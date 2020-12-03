@@ -1,7 +1,7 @@
 /*
   BMP280 - Temperature, Pressure Sensor
   Informations : https://www.adafruit.com/product/2651
-  Library  : Adafruit BMP280 
+  Library  : Adafruit BMP280
 */
 
 #include <Adafruit_BMP280.h>

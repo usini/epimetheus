@@ -252,5 +252,5 @@ void update_sensors() {
 // Basic I²C setup / sensors update on CORE 0
 // TODO manage multiples I²C port / Change I²C pins
 void setup_sensors() {
-  Wire.begin(); // As for now I²C based sensors are the only one managed.
+  Wire.begin(SDA_PIN, SCL_PIN); // As for now I²C based sensors are the only one managed.
 }

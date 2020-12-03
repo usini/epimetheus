@@ -7,8 +7,8 @@
 
 const bool SCANNER = true;
 
-const bool SDA_PIN = 21;
-const bool SCL_PIN = 22;
+const int SDA_PIN = 21;
+const int SCL_PIN = 22;
 
 const String TEMP_UNIT = "°C";
 const String TEMP_COLOR = "#e88f79";

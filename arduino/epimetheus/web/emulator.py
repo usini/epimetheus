@@ -122,6 +122,14 @@ def settings_js():
 def charts_js():
     return static_file("charts.js","./")
 
+@route('/hammerjs.js')
+def hammer_js():
+    return static_file("/hammerjs.js","./")
+
+@route('/chartjs-plugin-zoom.js')
+def charts_js_zoom():
+    return static_file("chartjs-plugin-zoom.js","./")
+
 @route('/lang.js')
 def lang_js():
     return static_file("lang.js","./")

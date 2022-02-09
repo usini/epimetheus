@@ -23,9 +23,34 @@ var chart_0_ctx = document.getElementById("chart_0").getContext('2d');
                 },
                 distribution: "linear"
             }]
+        },
+        plugins: {
+            zoom: {
+                zoom: {
+                    enabled: true,
+                    drag: true,
+                    mode: 'x',
+        
+                    rangeMin: {
+                        x: null,
+                        y: null
+                    },
+                    rangeMax: {
+                        x: null,
+                        y: null
+                    },
+        
+                    speed: 0.1,
+                    threshold: 2,
+                    sensitivity: 3,
+                    onZoom: function({chart}) { console.log(`I'm zooming!!!`); },
+                    onZoomComplete: function({chart}) { console.log(`I was zoomed!!!`); }
+                }
+            }
         }
     }
 });
+
 time = "";
 
 function currentTime() {

@@ -8,6 +8,14 @@
     #if defined(WEB_ENABLE)
         #include "communications/web.h"
     #endif
+
+    #if defined(NEOMATRIX_ENABLE)
+        #include "communications/neomatrix.h"
+    #endif
+
+    #if defined(BUZZER_ENABLE)
+        #include "communications/buzzer.h"
+    #endif
 #endif
 
 

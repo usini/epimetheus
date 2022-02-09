@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name usini_sensors)(type Legacy)(uri ${KIPRJMOD}/usini_sensors.lib)(options "")(descr ""))
+)

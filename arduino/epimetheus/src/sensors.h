@@ -16,7 +16,7 @@ int nb_sensors = 0;
 bool sensor_changed = false;
 bool clock_active = false;
 
-// For each sensor check I²C address and make it enable
+// For each sensor check I²C address and enable it
 void refresh_sensors(bool enable, byte address) {
 
   switch (address) {

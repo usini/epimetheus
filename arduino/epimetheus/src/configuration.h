@@ -4,6 +4,7 @@
 
 #define WIFI_ENABLE // Enable WiFi
 #define WEB_ENABLE  // Enable WebInterface / WebSocket
+#define NEOMATRIX_ENABLE // Enable Neopixel matrix on M5 Atom Matrix
 
 const bool SCANNER = true;
 

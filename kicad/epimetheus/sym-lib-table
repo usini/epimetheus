@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name epimetheus)(type Legacy)(uri ${KIPRJMOD}/epimetheus.lib)(options "")(descr ""))
+)

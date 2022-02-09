@@ -1,0 +1,114 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Connector_AudioJack4
+#
+DEF Connector_AudioJack4 J 0 20 Y Y 1 F N
+F0 "J" 0 350 50 H V C CNN
+F1 "Connector_AudioJack4" 0 250 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Jack*
+$ENDFPLIST
+DRAW
+S -250 -200 -300 -300 0 1 10 F
+S 100 150 -250 -300 0 1 10 f
+P 4 0 1 10 0 -200 25 -225 50 -200 100 -200 N
+P 5 0 1 10 -225 -200 -200 -225 -175 -200 -175 100 100 100 N
+P 5 0 1 10 -75 -200 -50 -225 -25 -200 -25 -100 100 -100 N
+P 5 0 1 10 100 0 -100 0 -100 -200 -125 -225 -150 -200 N
+X ~ R1 200 -100 100 L 50 50 1 1 P
+X ~ R2 200 0 100 L 50 50 1 1 P
+X ~ S 200 100 100 L 50 50 1 1 P
+X ~ T 200 -200 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Conn_01x02_Male
+#
+DEF Connector_Conn_01x02_Male J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Conn_01x02_Male" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S 34 -95 0 -105 1 1 6 F
+S 34 5 0 -5 1 1 6 F
+P 2 1 1 6 50 -100 34 -100 N
+P 2 1 1 6 50 0 34 0 N
+X Pin_1 1 200 0 150 L 50 50 1 1 P
+X Pin_2 2 200 -100 150 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# power_+3.3V
+#
+DEF power_+3.3V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+3.3V" 0 140 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+ALIAS +3.3V
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +3V3 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_+3V3
+#
+DEF power_+3V3 #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+3V3" 0 140 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +3V3 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# usini_sensors_module_mpu6050
+#
+DEF usini_sensors_module_mpu6050 U 0 40 Y Y 1 F N
+F0 "U" 100 850 50 H V C CNN
+F1 "usini_sensors_module_mpu6050" 450 -150 50 H V C CNN
+F2 "usini_sensors:module_mpu6050" 450 -250 50 H I C CNN
+F3 "" 0 250 50 H I C CNN
+DRAW
+C 650 0 50 0 1 0 N
+C 650 700 50 0 1 0 N
+S 100 800 750 -100 0 1 0 f
+X VCC 1 0 700 100 R 50 50 1 1 I
+X GND 2 0 600 100 R 50 50 1 1 I
+X SCL 3 0 500 100 R 50 50 1 1 I
+X SDA 4 0 400 100 R 50 50 1 1 I
+X XDA 5 0 300 100 R 50 50 1 1 I
+X XCL 6 0 200 100 R 50 50 1 1 I
+X ADD 7 0 100 100 R 50 50 1 1 I
+X INT 8 0 0 100 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library

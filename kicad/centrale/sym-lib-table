@@ -1,5 +1,0 @@
-(sym_lib_table
-  (lib (name centrale)(type Legacy)(uri ${KIPRJMOD}/centrale.lib)(options "")(descr ""))
-  (lib (name adaptateur_capteur)(type Legacy)(uri ${KIPRJMOD}/adaptateur_capteur.lib)(options "")(descr ""))
-  (lib (name centrale-rescue)(type Legacy)(uri ${KIPRJMOD}/centrale-rescue.lib)(options "")(descr ""))
-)

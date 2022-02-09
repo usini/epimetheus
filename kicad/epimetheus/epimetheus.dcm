@@ -1,0 +1,7 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP M5_ATOM_MATRIX
+F https://m5stack.com/collections/m5-atom/products/atom-matrix-esp32-development-kit
+$ENDCMP
+#
+#End Doc Library

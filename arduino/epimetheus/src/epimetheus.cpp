@@ -22,6 +22,13 @@ void setup() {
   scan_serial();   // Display scan on Serial
 
   /* Communication */
+
+  #if defined(NEOMATRIX_ENABLE)
+    setup_neomatrix();
+  #endif
+
+  delay(1000);
+
   #if defined(WIFI_ENABLE)
     setup_wifi(); // Setup WiFi connection (hotspot or not)
   #endif
@@ -33,12 +40,13 @@ void setup() {
 
 void loop() {
   // Webserver / Websocket is async not need to update in loop
+
   update_sensors(); //Get new values from sensors
-  //Each timerDelay_update display data
+  // Each timerDelay_update display data
   if ((millis() - lastTime_update) > timerDelay_update) {
     debug_serial_start();
     scan_serial();
-    update_serial();  //Display values on Serial
+    update_serial();  // Display values on Serial
 
     if(save_flash) { // If save_flash is active
       if(sensor_changed) { // Recreate header if sensor change
@@ -51,7 +59,7 @@ void loop() {
     debug_serial_end("update");
   }
 
-  //Each timerDelay_scan check i²c
+  // Each timerDelay_scan check i²c
   if ((millis() - lastTime_scan) > timerDelay_scan) {
     scan_sensors();
 
